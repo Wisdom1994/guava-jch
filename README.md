@@ -77,24 +77,22 @@ Guava 的最新的快照是通过 Maven 构建的、基于 `master` 分支的 `H
 您就不应使用带有`@Beta` 注解的 API, 除非你 [重新打包](https://github.com/google/guava/wiki/UseGuavaInYourBuild#what-if-i-want-to-use-beta-apis-from-a-library-that-people-use-as-a-dependency) 他们.
 **如果您的代码是一个类库，我们强烈建议您使用[Guava Beta Checker] 工具去检查您没有使用带有 `@Beta` 注解的 API**
 
-2. 没有被`@Beta`注解标记的API在未来是会被兼容的(Previously, we sometimes removed such APIs after a deprecation period.
-The last release to remove non-`@Beta` APIs was Guava 21.0.) Even `@Deprecated`
-APIs will remain (again, unless they are `@Beta`). We have no plans to start
-removing things again, but officially, we're leaving our options open in case
-of surprises (like, say, a serious security problem).
+2. 没有被`@Beta`注解标记的API在不确定的将来会保持二进制兼容(在之前，
+我们有时会在弃用期结束之后移除掉这些API。最后一次移除 “非`@Beta`”的
+API是在 21.0 版本。)
+然而`@Deprecated(已经弃用)`的API仍然存在(除非他们是`@Beta`)。我们没有再次
+开始删除这些东西的计划，但是从官方的角度来说，我们可能在出现意外时
+(比如说发生了严重的安全问题的)再次的开启这个计划(删除 API)。
 
-3. Serialized forms of ALL objects are subject to change unless noted
-otherwise. Do not persist these and assume they can be read by a
-future version of the library.
+3. 除非另有说明，所有的对象序列化的方式都有可能被更改。对此你不应该
+特别的关注，你只要相信这些对象在未来版本的库中都能被序列化就可以了。
 
-4. Our classes are not designed to protect against a malicious caller.
-You should not use them for communication between trusted and
-untrusted code.
+4. 我们的类在设计之初就没有设计成可以防范非法调用的功能，所以你不
+应该将他们用在“可信”与“不可信”的代码之间的通信上。
 
-5. For the mainline flavor, we unit-test the libraries using only OpenJDK 1.8 on
-Linux. Some features, especially in `com.google.common.io`, may not work
-correctly in other environments. For the Android flavor, our unit tests run on
-API level 15 (Ice Cream Sandwich).
+5. 对于主流版本，我们只在 Linux 上使用 OpenJDK_1.8 来进行单元测试。
+对于某些功能来说，尤其是 `com.google.common.io`可能在其他的环境下
+无法正常的工作。对于 Android 版本，我们的单元测试运行在 Lv15 的等级上。
 
 [current release]: https://github.com/google/guava/releases/tag/v24.1
 [guava-snapshot-api-docs]: http://google.github.io/guava/releases/snapshot-jre/api/docs/
