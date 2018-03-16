@@ -2,19 +2,15 @@
 
 ## Overview
 
-Java's baked-in concept of hash codes is constrained to 32 bits, and provides no
-separation between hash algorithms and the data they act on, so alternate hash
-algorithms can't be easily substituted. Also, implementations of hashCode tend
-to be poor-quality, in part because they end up depending on other existing
-poor-quality hashCode implementations, including those in many JDK classes.
+Java 的 HashCode 的长度被限制在 32 位，并且哈希算法与他们作用的数据(类或方法)之间没有分离，
+因此很难使用另外的哈希算法进行替换。同时，Java 内建的哈希算法生成的 Hash 值是十
+分劣质的，有一部分原因是因为他们依赖于劣质的 Hashcode 实现，包括很多 JDK 中的实现类。
 
-Object.hashCode implementations tend to be very fast, but have weak collision
-prevention and no expectation of bit dispersion. This leaves them perfectly
-suitable for use in hash tables, because extra collisions cause only a slight
-performance hit, while poor bit dispersion is easily corrected using a secondary
-hash function (which all reasonable hash table implementations in Java use). For
-the many uses of hash functions beyond simple hash tables, however,
-`Object.hashCode` almost always falls short -- hence [`com.google.common.hash`].
+Java 中 `Object.hashCode` 运行十分快速，但是缺乏对 **哈希碰撞** 问题的预防，同时也
+缺乏对散列值的期望。这种特性却让他十分适合与应用在哈希表中，因为额外的哈希碰撞只会
+带来很小的性能损失，同时十分差劲的分散性可以采用二次哈希的方法解决(Java 中几乎所有
+合理的哈希算法(哈希函数)都采用这种方法进行实现)。然而，在简单哈希表之外的很多哈希应用中，
+`Object.hashCode`却是不足的，因此`com.google.common.hash`包被设计出来。
 
 ## Organization
 
