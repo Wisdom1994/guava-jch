@@ -30,16 +30,13 @@ HashCode hc = hf.newHasher()
 [`HashFunction`] 是一个对引用透明的、无状态(无返回值)的方法，他把任意的数据块映射到固定长度的地址中，
 尽量确保相同的输入一定产生相同的输出，不同的输入产生不同的输出。 
 
-#### Hasher
+#### Hasher (哈希对象)
 
-A `HashFunction` can be asked for a stateful [`Hasher`], which provides fluent
-syntax to add data to the hash and then retrieve the hash value. A `Hasher` can
-accept any primitive input, byte arrays, slices of byte arrays, character
-sequences, character sequences in some charset, and so on, or any other
-`Object`, provided with an appropriate `Funnel`.
+一个 `HashFunciton` 可以提供一个有状态的 [`Hasher`]，它提供了可以将输入数据十分快速的计算出哈希值的方法。
+`Hasher` 可以接受任何形式的数据，byte arrays(字节数组)、byte arrays(字节数组的片段)、character squences(特定字符集的字符序列)等等，
+或者是任何一个提供了 `Funnel` 实现的对象。
 
-`Hasher` implements the `PrimitiveSink` interface, which specifies a fluent API
-for an object that accepts a stream of primitive values.
+`Hasher` 实现了 `PrimitiveSink` 接口，为 **一个接受原生数据类型的流的对象** 定义了 fluent 风格的 API。
 
 #### Funnel
 
