@@ -1,6 +1,6 @@
-# Hashing
+# Hashing (哈希)
 
-## Overview
+## Overview (概述)
 
 Java 的 HashCode 的长度被限制在 32 位，并且哈希算法与他们作用的数据(类或方法)之间没有分离，
 因此很难使用另外的哈希算法进行替换。同时，Java 内建的哈希算法生成的 Hash 值是十分劣质的，有一部分原因是因为他们依赖于劣质的 Hashcode 实现，其中包括很多 JDK 中的实现类。
@@ -10,12 +10,11 @@ Java 中 `Object.hashCode` 运行十分快速，但是缺乏对 **哈希碰撞**
 合理的哈希算法(哈希函数)都采用这种方法进行实现)。然而，在简单哈希表之外的很多哈希应用中，
 `Object.hashCode`却是不足的，因此`com.google.common.hash`包被设计出来。
 
-## Organization
+## Organization (组成)
 
-Looking at the package Javadoc, we see a lot of different types, but it's not
-obvious how they fit together.
+通过查看包的 Java doc 文档， 我们会发现很多不同的类，但是并没有明显的说明他们是如何协同工作的。
 
-Let's look at a sample piece of code using this library.
+让我们先看一下这个类库的一部分代码：
 
 ``` java
 HashFunction hf = Hashing.md5();
@@ -26,11 +25,10 @@ HashCode hc = hf.newHasher()
        .hash();
 ```
 
-#### HashFunction
+#### HashFunction (哈希方法--生成Hash值的方法)
 
-[`HashFunction`] is a pure, stateless function that maps an arbitrary block of
-data to a fixed number of bits, with the property that equal inputs always yield
-equal outputs, and unequal inputs yield unequal outputs as often as possible.
+[`HashFunction`] 是一个对引用透明的、无状态(无返回值)的方法，他把任意的数据块映射到固定长度的地址中，
+尽量确保相同的输入一定产生相同的输出，不同的输入产生不同的输出。 
 
 #### Hasher
 
