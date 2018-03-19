@@ -80,6 +80,7 @@ Charsets.UTF_8)`, 因为他们生成相同的字节序列。这可能导致意�
 // 注：writeBytesTo 方法在 Guava 中如此定义： 
 @CanIgnoreReturnValue
 public int writeBytesTo(byte[] dest, int offset, int maxLength)
+/**
 解释：
     将 Hash code 的字节串拷贝到目标数组中
 参数:
@@ -88,7 +89,7 @@ public int writeBytesTo(byte[] dest, int offset, int maxLength)
     maxLength - 字节数组的最大写入长度
 返回值:
     int 写入到目标位置的字节数
-
+*/
 ```
 
 ### BloomFilter (一个过滤器)
