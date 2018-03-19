@@ -77,7 +77,7 @@ Charsets.UTF_8)`, 因为他们生成相同的字节序列。这可能导致意�
 [`writeBytesTo(array, offset, maxLength)`] 方法支持将哈希值前 `maxLength` 长度的字节写入到数组中。
 
 ``` Java
-// writeBytesTo 方法在 Guava 中如此定义： 
+// 注：writeBytesTo 方法在 Guava 中如此定义： 
 @CanIgnoreReturnValue
 public int writeBytesTo(byte[] dest, int offset, int maxLength)
 解释：
@@ -90,13 +90,8 @@ public int writeBytesTo(byte[] dest, int offset, int maxLength)
     int 写入到目标位置的字节数
 
 ```
- `Hasher` has been given all its input, its [`hash()`] method can be used
-to retrieve a [`HashCode`]. `HashCode` supports equality testing and such, as
-well as [`asInt()`], [`asLong()`], [`asBytes()`] methods, and additionally,
-[`writeBytesTo(array, offset, maxLength)`], which writes the first `maxLength`
-bytes of the hash into the array.
 
-### BloomFilter
+### BloomFilter (一个过滤器)
 
 Bloom filters are a lovely application of hashing that cannot be done simply
 using `Object.hashCode()`. Briefly, Bloom filters are a probabilistic data
@@ -126,8 +121,7 @@ if (friends.mightContain(dude)) {
 
 ## Hashing
 
-The `Hashing` utility class provides a number of stock hash functions and
-utilities to operate on `HashCode` objects.
+`Hashing` 提供了很多的哈希函数，和对 `HashCode` 对象进行操作运算的工具方法。
 
 ### Provided Hash Functions(提供的Hash函数)
 
@@ -139,9 +133,9 @@ utilities to operate on `HashCode` objects.
 *   [`sha512()`]
 *   [`goodFastHash(int bits)`]
 
-### HashCode Operations
+### HashCode Operations 算法
 
-Method                                            | Description
+方法名                                            | 描述
 :------------------------------------------------ | :----------
 [`HashCode combineOrdered(Iterable<HashCode>)`]   | Combines hash codes in an ordered fashion, so that if two hashes obtained from this method are the same, then it is likely that each was computed from the same hashes in the same order.
 [`HashCode combineUnordered(Iterable<HashCode>)`] | Combines hash codes in an unordered fashion, so that if two hashes obtained from this method are the same, then it is likely that each was computed from the same hashes in some order.
