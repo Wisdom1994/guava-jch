@@ -96,8 +96,8 @@ public int writeBytesTo(byte[] dest, int offset, int maxLength)
 
 Bloom filters 是哈希运算的一个优雅的运用, 不能简单的采用 `Object.hashCode()` 来实现。
 简而言之，BloomFilter 是一个概率数据结构, 允许你测试一个对象**一定**不在这个过滤器中,
-或者他**可能**已经存在与里面。[BloomFilter 的维基页面](http://en.wikipedia.org/wiki/Bloom_filter) 解释的相当全面,
-我们推荐一个关于BloomFilter 的 [教程](http://llimllib.github.com/bloomfilter-tutorial/)。
+或者他**可能**已经存在与里面。对此，[BloomFilter 的维基页面](http://en.wikipedia.org/wiki/Bloom_filter) 进行了相当详细的解释,
+同时这里推荐一个关于BloomFilter 的 [教程](http://llimllib.github.com/bloomfilter-tutorial/)。
 
 Guava 的哈希类库中有个内建的 `BloomFilter` 实现, 只需要你提供一个 `Funnel` 的实现类，就能将他分解为原始类型。
 你可以通过 [`create(Funnel funnel, int
@@ -135,9 +135,9 @@ if (friends.mightContain(dude)) { // 如果 dude 可能包括在 friends 中
 
 方法名                                            | 描述
 :------------------------------------------------ | :----------
-[`HashCode combineOrdered(Iterable<HashCode>)`]   | Combines hash codes in an ordered fashion, so that if two hashes obtained from this method are the same, then it is likely that each was computed from the same hashes in the same order.
-[`HashCode combineUnordered(Iterable<HashCode>)`] | Combines hash codes in an unordered fashion, so that if two hashes obtained from this method are the same, then it is likely that each was computed from the same hashes in some order.
-[`int consistentHash(HashCode, int buckets)`]     | Assigns the hash code a consistent "bucket" which minimizes the need for remapping as the number of buckets grows. See [Wikipedia](http://en.wikipedia.org/wiki/Consistent_hashing) for details.
+[`HashCode combineOrdered(Iterable<HashCode>)`]   | 以有序的方式使 HashCode 结合起来，如果两个 HashCode 集合采用此种方法结合后的 HashCode 相同，那么这两个 HashCode 集合中的元素可能是顺序相等的。
+[`HashCode combineUnordered(Iterable<HashCode>)`] | 以无序的方式使 HashCode 结合起来，如果两个 HashCode 集合采用此方法结合后的 HashCode 相同，那么这两个 HashCode 集合中的元素可能在某种排序方式是顺序相等的。
+[`int consistentHash(HashCode, int buckets)`]     | 以给定 buckets 的大小分配一致性哈希，最大限度的减少随 buckets 增长而进行重新映射的需要.详情请见 [一致性哈希 Wikipedia](http://en.wikipedia.org/wiki/Consistent_hashing)。
 
 [`com.google.common.hash`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/hash/package-summary.html
 [`HashFunction`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/hash/HashFunction.html
