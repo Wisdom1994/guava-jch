@@ -124,20 +124,20 @@ if (friends.mightContain(dude)) { // 如果 dude 可能包括在 friends 中
 ### Provided Hash Functions(提供的Hash函数)
 
 *   [`md5()`]
-*   [`murmur3_128()`]
-*   [`murmur3_32()`]
-*   [`sha1()`]
+*   [`murmur3_128()`] 使用零值种子返回一个 murmur3 算法实现的 128 位的哈希值
+*   [`murmur3_32()`] 使用零值种子返回一个 murmur3 算法实现的 32 位的哈希值
+*   [`sha1()`] 被 Google 破解的安全哈希算法
 *   [`sha256()`]
 *   [`sha512()`]
-*   [`goodFastHash(int bits)`]
+*   [`goodFastHash(int bits)`] 返回一个多用途的，临时使用的，非加密的 Hash Function.
 
 ### HashCode Operations 算法
 
 方法名                                            | 描述
 :------------------------------------------------ | :----------
 [`HashCode combineOrdered(Iterable<HashCode>)`]   | 以有序的方式使 HashCode 结合起来，如果两个 HashCode 集合采用此种方法结合后的 HashCode 相同，那么这两个 HashCode 集合中的元素可能是顺序相等的。
-[`HashCode combineUnordered(Iterable<HashCode>)`] | 以无序的方式使 HashCode 结合起来，如果两个 HashCode 集合采用此方法结合后的 HashCode 相同，那么这两个 HashCode 集合中的元素可能在某种排序方式是顺序相等的。
-[`int consistentHash(HashCode, int buckets)`]     | 以给定 buckets 的大小分配一致性哈希，最大限度的减少随 buckets 增长而进行重新映射的需要.详情请见 [一致性哈希 Wikipedia](http://en.wikipedia.org/wiki/Consistent_hashing)。
+[`HashCode combineUnordered(Iterable<HashCode>)`] | 以无序的方式使 HashCode 结合起来，如果两个 HashCode 集合采用此方法结合后的 HashCode 相同，那么这两个 HashCode 集合中的元素可能在某种排序方式下是顺序相等的。
+[`int consistentHash(HashCode, int buckets)`]     | 以给定 buckets 的大小分配一致性哈希，最大限度的减少随 buckets 增长而进行重新映射的需要.了解详情 [一致性哈希 Wikipedia](http://en.wikipedia.org/wiki/Consistent_hashing)。
 
 [`com.google.common.hash`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/hash/package-summary.html
 [`HashFunction`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/hash/HashFunction.html
