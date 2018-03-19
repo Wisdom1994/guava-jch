@@ -94,29 +94,26 @@ public int writeBytesTo(byte[] dest, int offset, int maxLength)
 
 ### BloomFilter (一个过滤器)
 
-Bloom filters are a lovely application of hashing that cannot be done simply
-using `Object.hashCode()`. Briefly, Bloom filters are a probabilistic data
-structure, allowing you to test if an object is _definitely_ not in the filter,
-or was _probably_ added to the Bloom filter. The [Wikipedia
-page](http://en.wikipedia.org/wiki/Bloom_filter) is fairly comprehensive, and we
-recommend [this tutorial](http://llimllib.github.com/bloomfilter-tutorial/).
+Bloom filters 是哈希运算的一个优雅的运用, 不能简单的采用 `Object.hashCode()` 来实现。
+简而言之，BloomFilter 是一个概率数据结构, 允许你测试一个对象**一定**不在这个过滤器中,
+或者他**可能**已经存在与里面。[BloomFilter 的维基页面](http://en.wikipedia.org/wiki/Bloom_filter) 解释的相当全面,
+我们推荐一个关于BloomFilter 的 [教程](http://llimllib.github.com/bloomfilter-tutorial/)。
 
-Our hashing library has a built-in Bloom filter implementation, which requires
-only that you implement a `Funnel` to decompose your type into primitive types.
-You can obtain a fresh [`BloomFilter<T>`] with [`create(Funnel funnel, int
-expectedInsertions, double falsePositiveProbability)`], or just accept the
-default false probability of 3%. `BloomFilter<T>` offers the methods [`boolean
-mightContain(T)`] and [`void put(T)`], which are self-explanatory enough.
+Guava 的哈希类库中有个内建的 `BloomFilter` 实现, 只需要你提供一个 `Funnel` 的实现类，就能将他分解为原始类型。
+你可以通过 [`create(Funnel funnel, int
+expectedInsertions, double falsePositiveProbability)`] 方法来获取一个 [`BloomFilter<T>`] 对象,
+缺省误检率只有 3%。 `BloomFilter<T>` 提供了 [`boolean mightContain(T)`] 和 [`void put(T)`] 方法,
+他们的功能显而易见。
 
 ``` java
 BloomFilter<Person> friends = BloomFilter.create(personFunnel, 500, 0.01);
 for (Person friend : friendsList) {
   friends.put(friend);
 }
-// much later
-if (friends.mightContain(dude)) {
-  // the probability that dude reached this place if he isn't a friend is 1%
-  // we might, for example, start asynchronously loading things for dude while we do a more expensive exact check
+// 很久之后... 
+if (friends.mightContain(dude)) { // 如果 dude 可能包括在 friends 中
+  // dude 不是一个 friend(Person 的实现) 并且还运行到这里的概率为 1%
+  // 我们可以在这对 dude 进行精确检查的同时进行一些异步加载。
 }
 ```
 
