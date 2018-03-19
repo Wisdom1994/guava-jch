@@ -40,8 +40,7 @@ HashCode hc = hf.newHasher()
 
 #### Funnel
 
-A [`Funnel`] describes how to decompose a particular object type into primitive
-field values. For example, if we had
+一个 [`Funnel`] 描述了如何将一个确定的对象分解为原生字段值。比如，我们有这样一个对象：
 
 ``` java
 class Person {
@@ -52,7 +51,7 @@ class Person {
 }
 ```
 
-our `Funnel` might look like
+我们的 `Funnel` 可能看起来像这样
 
 ``` java
 Funnel<Person> personFunnel = new Funnel<Person>() {
@@ -67,15 +66,31 @@ Funnel<Person> personFunnel = new Funnel<Person>() {
 };
 ```
 
-_Note:_ `putString("abc", Charsets.UTF_8).putString("def", Charsets.UTF_8)` is
-fully equivalent to `putString("ab", Charsets.UTF_8).putString("cdef",
-Charsets.UTF_8)`, because they produce the same byte sequence. This can cause
-unintended hash collisions. Adding separators of some kind can help eliminate
-unintended hash collisions.
+注： `putString("abc", Charsets.UTF_8).putString("def", Charsets.UTF_8)` 等同于 `putString("ab", Charsets.UTF_8).putString("cdef",
+Charsets.UTF_8)`, 因为他们生成相同的字节序列。这可能导致意料之外的 Hash冲突，
+增加某种形式的分隔符有助于减少 Hash冲突。
 
 #### HashCode
 
-Once a `Hasher` has been given all its input, its [`hash()`] method can be used
+一旦 `Hasher` 拿到了所有的输入值, 他就可以调用 [`hash()`] 方法得到一个 [`HashCode`] 实例。
+`HashCode` 支持平等性检测，比如 [`asInt()`], [`asLong()`], [`asBytes()`] 方法等,此外，
+[`writeBytesTo(array, offset, maxLength)`] 方法支持将哈希值前 `maxLength` 长度的字节写入到数组中。
+
+``` Java
+// writeBytesTo 方法在 Guava 中如此定义： 
+@CanIgnoreReturnValue
+public int writeBytesTo(byte[] dest, int offset, int maxLength)
+解释：
+    将 Hash code 的字节串拷贝到目标数组中
+参数:
+    dest - 将被字节数组写入的位置
+    offset - 数据起始位
+    maxLength - 字节数组的最大写入长度
+返回值:
+    int 写入到目标位置的字节数
+
+```
+ `Hasher` has been given all its input, its [`hash()`] method can be used
 to retrieve a [`HashCode`]. `HashCode` supports equality testing and such, as
 well as [`asInt()`], [`asLong()`], [`asBytes()`] methods, and additionally,
 [`writeBytesTo(array, offset, maxLength)`], which writes the first `maxLength`
@@ -114,7 +129,7 @@ if (friends.mightContain(dude)) {
 The `Hashing` utility class provides a number of stock hash functions and
 utilities to operate on `HashCode` objects.
 
-### Provided Hash Functions
+### Provided Hash Functions(提供的Hash函数)
 
 *   [`md5()`]
 *   [`murmur3_128()`]
