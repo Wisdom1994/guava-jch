@@ -81,13 +81,18 @@ Guava 的最新的快照是通过 Maven 构建的、基于 `master` 分支的 `H
 
 5. 对于主流版本，我们只在 Linux 上使用 OpenJDK_1.8 来进行单元测试。对于某些功能来说，尤其是 `com.google.common.io`可能在其他的环境下无法正常的工作。对于 Android 版本，我们的单元测试运行在 Lv15 的等级上。
 
+# 这里之下可以看作目录
+## Guava 用户指南 中文
+#### Hashing 哈希
+[Hashing 哈希](https://github.com/Wisdom1994/guava-jch/blob/master/Guied-Explained(%E6%8C%87%E5%8D%97-%E8%AF%B4%E6%98%8E%E4%B9%A6)/Hashing(%E5%93%88%E5%B8%8C).md)
+
+## Guava 代码解析
+<!-- References -->
 [current release]: https://github.com/google/guava/releases/tag/v24.1
 [guava-snapshot-api-docs]: http://google.github.io/guava/releases/snapshot-jre/api/docs/
 [guava-snapshot-api-diffs]: http://google.github.io/guava/releases/snapshot-jre/api/diffs/
 [Guava Explained]: https://github.com/google/guava/wiki/Home
 [Guava Beta Checker]: https://github.com/google/guava-beta-checker
-
-<!-- References -->
 
 [Using Guava in your build]: https://github.com/google/guava/wiki/UseGuavaInYourBuild
 [repackage]: https://github.com/google/guava/wiki/UseGuavaInYourBuild#what-if-i-want-to-use-beta-apis-from-a-library-that-people-use-as-a-dependency
