@@ -15,7 +15,7 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
            });
 ```
 
-## Applicability
+## Applicability 适用于
 
 Caches are tremendously useful in a wide variety of use cases. For example, you
 should consider using caches when a value is expensive to compute or retrieve,
@@ -28,17 +28,14 @@ generally configured to evict entries automatically, in order to constrain its
 memory footprint. In some cases a `LoadingCache` can be useful even if it
 doesn't evict entries, due to its automatic cache loading.
 
-Generally, the Guava caching utilities are applicable whenever:
+总的来说, Guava 缓存适用于以下几个方面：
 
-*   You are willing to spend some memory to improve speed.
-*   You expect that keys will sometimes get queried more than once.
-*   Your cache will not need to store more data than what would fit in RAM.
-    (Guava caches are **local** to a single run of your application. They do not
-    store data in files, or on outside servers. If this does not fit your needs,
-    consider a tool like [Memcached](http://memcached.org/).)
+*   你愿意使用更多的内存来提升速度(空间换时间)。
+*   你预料到某些键将会被使用一次以上。
+*   缓存数据量不会超过你的内存大小。(Guava caches 是你应用程序上单线程的本地缓存, 数据不会存储到文件或者外部服务器中。
+    如果这满足不了你的需求，请考虑一下比如 [Memcached](http://memcached.org/) 的工具。(注：[Redis](https://redis.io) 也可以))
 
-If each of these apply to your use case, then the Guava caching utilities could
-be right for you!
+如果你的应用场景符合上边的每一条，Guava Caches 就非常满足你的要求。
 
 Obtaining a `Cache` is done using the `CacheBuilder` builder pattern as
 demonstrated by the example code above, but customizing your cache is the
@@ -48,7 +45,7 @@ _Note:_ If you do not need the features of a `Cache`, `ConcurrentHashMap` is
 more memory-efficient -- but it is extremely difficult or impossible to
 duplicate most `Cache` features with any old `ConcurrentMap`.
 
-## Population
+## Population 成员
 
 The first question to ask yourself about your cache is: is there some _sensible
 default_ function to load or compute a value associated with a key? If so, you
