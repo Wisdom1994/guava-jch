@@ -15,18 +15,14 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
            });
 ```
 
-## Applicability 适用于
+## Applicability -- 适用于
 
-Caches are tremendously useful in a wide variety of use cases. For example, you
-should consider using caches when a value is expensive to compute or retrieve,
-and you will need its value on a certain input more than once.
+缓存在很多场景下都非常有用。比如，当计算或者搜索一个值的开销特别大、或者需要多次获取同一个输出而产生的值的时候。
 
-A `Cache` is similar to `ConcurrentMap`, but not quite the same. The most
-fundamental difference is that a `ConcurrentMap` persists all elements that are
-added to it until they are explicitly removed. A `Cache` on the other hand is
-generally configured to evict entries automatically, in order to constrain its
-memory footprint. In some cases a `LoadingCache` can be useful even if it
-doesn't evict entries, due to its automatic cache loading.
+`Cache` 有些类似于 Java 集合类中的 `ConcurrentMap`, 但又不是完全相同。
+最基本的不同之处在于 `ConcurrentMap` 会保存所有的元素直到这些元素被显示的移除,
+而 `Cache` 为了限制内存占用通常会被设置为自动清理元素。在某些情况下,
+尽管`LoadingCache` 从不回收元素，它也是很有用的，它会在必要的时候自动加载缓存。 
 
 总的来说, Guava 缓存适用于以下几个方面：
 
@@ -37,15 +33,12 @@ doesn't evict entries, due to its automatic cache loading.
 
 如果你的应用场景符合上边的每一条，Guava Caches 就非常满足你的要求。
 
-Obtaining a `Cache` is done using the `CacheBuilder` builder pattern as
-demonstrated by the example code above, but customizing your cache is the
-interesting part.
+如同示例一样，`Cache` 可以通过 `CacheBuilder` 来生成，但是自定义你的 `Cache` 才是最有趣的一部分。 
 
-_Note:_ If you do not need the features of a `Cache`, `ConcurrentHashMap` is
-more memory-efficient -- but it is extremely difficult or impossible to
-duplicate most `Cache` features with any old `ConcurrentMap`.
+注：如果你不需要 `Cache` 的一些特性，`ConcurrentHashMap` 有更优的内存效率,
+但是通过 `ConcurrentMap` 来复制(实现) `Cache` 的一些特性却是极其困难或者说是不可能的。
 
-## Population 成员
+## Population -- 成员
 
 The first question to ask yourself about your cache is: is there some _sensible
 default_ function to load or compute a value associated with a key? If so, you
@@ -55,7 +48,7 @@ you still want atomic "get-if-absent-compute" semantics, you should pass a
 `Cache.put`, but automatic cache loading is preferred as it makes it easier to
 reason about consistency across all cached content.
 
-#### From a CacheLoader
+#### From a CacheLoader -- Cache加载器
 
 A `LoadingCache` is a `Cache` built with an attached [`CacheLoader`]. Creating a
 `CacheLoader` is typically as easy as implementing the method `V load(K key)
@@ -71,7 +64,6 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
                return createExpensiveGraph(key);
              }
            });
-
 ...
 try {
   return graphs.get(key);
@@ -115,7 +107,7 @@ for keys that were not specifically requested. For example, if computing the
 value of any key from some group gives you the value for all keys in the group,
 `loadAll` might load the rest of the group at the same time.
 
-#### From a Callable
+#### From a Callable -- 回调
 
 All Guava caches, loading or not, support the method [`get(K, Callable<V>)`].
 This method returns the value associated with the key in the cache, or computes
@@ -143,7 +135,7 @@ try {
 }
 ```
 
-#### Inserted Directly
+#### Inserted Directly -- 显示插入
 
 Values may be inserted into the cache directly with [`cache.put(key, value)`].
 This overwrites any previous entry in the cache for the specified key. Changes
@@ -155,14 +147,14 @@ operations on that view operate outside the scope of automatic cache loading, so
 `Cache.asMap().putIfAbsent` in caches which load values using either
 `CacheLoader` or `Callable`.
 
-## Eviction
+## Eviction -- 内存回收
 
 The cold hard reality is that we almost _certainly_ don't have enough memory to
 cache everything we could cache. You must decide: when is it not worth keeping a
 cache entry? Guava provides three basic types of eviction: size-based eviction,
 time-based eviction, and reference-based eviction.
 
-### Size-based Eviction
+### Size-based Eviction -- 基于内存大小的回收(超出你设置的内存大小)
 
 If your cache should not grow beyond a certain size, just use
 [`CacheBuilder.maximumSize(long)`]. The cache will try to evict entries that
@@ -193,7 +185,7 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
            });
 ```
 
-### Timed Eviction
+### Timed Eviction -- 超时回收
 
 `CacheBuilder` provides two approaches to timed eviction:
 
@@ -209,14 +201,14 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
 Timed expiration is performed with periodic maintenance during writes and
 occasionally during reads, as discussed below.
 
-#### Testing Timed Eviction
+#### Testing Timed Eviction -- 测试定时回收
 
 Testing timed eviction doesn't have to be painful...and doesn't actually have to
 take you two seconds to test a two-second expiration. Use the [Ticker] interface
 and the [`CacheBuilder.ticker(Ticker)`] method to specify a time source in your
 cache builder, rather than having to wait for the system clock.
 
-### Reference-based Eviction
+### Reference-based Eviction -- 基于引用的回收
 
 Guava allows you to set up your cache to allow the garbage collection of
 entries, by using [weak references] for keys or values, and by using [soft
@@ -239,7 +231,7 @@ references] for values.
     predictable [maximum cache size][size-based eviction] instead. Use of `softValues()` will cause
     values to be compared using identity (`==`) equality instead of `equals()`.
 
-### Explicit Removals
+### Explicit Removals -- 显示移除
 
 At any time, you may explicitly invalidate cache entries rather than waiting for
 entries to be evicted. This can be done:
@@ -248,7 +240,7 @@ entries to be evicted. This can be done:
 *   in bulk, using [`Cache.invalidateAll(keys)`]
 *   to all entries, using [`Cache.invalidateAll()`]
 
-### Removal Listeners
+### Removal Listeners -- 移除时监听器
 
 You may specify a removal listener for your cache to perform some operation when
 an entry is removed, via [`CacheBuilder.removalListener(RemovalListener)`]. The
@@ -277,14 +269,14 @@ return CacheBuilder.newBuilder()
   .build(loader);
 ```
 
-**Warning**: removal listener operations are executed synchronously by default,
+**警告**: removal listener operations are executed synchronously by default,
 and since cache maintenance is normally performed during normal cache
 operations, expensive removal listeners can slow down normal cache function! If
 you have an expensive removal listener, use
 [`RemovalListeners.asynchronous(RemovalListener, Executor)`] to decorate a
 `RemovalListener` to operate asynchronously.
 
-### When Does Cleanup Happen?
+### 清理(内存释放)会在什么时候发生？
 
 Caches built with `CacheBuilder` do _not_ perform cleanup and evict values
 "automatically," or instantly after a value expires, or anything of the sort.
@@ -306,7 +298,7 @@ that calls [`Cache.cleanUp()`] at regular intervals.
 If you want to schedule regular cache maintenance for a cache which only rarely
 has writes, just schedule the maintenance using [`ScheduledExecutorService`].
 
-### Refresh
+### Refresh -- 刷新
 
 Refreshing is not quite the same as eviction. As specified in
 [`LoadingCache.refresh(K)`], refreshing a key loads a new value for the key,
@@ -360,9 +352,9 @@ same cache, so that the expiration timer on an entry isn't blindly reset
 whenever an entry becomes eligible for a refresh, so if an entry isn't queried
 after it comes eligible for refreshing, it is allowed to expire.
 
-## Features
+## Features -- 特性
 
-### Statistics
+### Statistics -- 统计(对Caches工作状态的统计)
 
 By using [`CacheBuilder.recordStats()`], you can turn on statistics collection
 for Guava caches. The [`Cache.stats()`] method returns a [`CacheStats`] object,
@@ -377,7 +369,7 @@ and many more statistics besides. These statistics are critical in cache tuning,
 and we advise keeping an eye on these statistics in performance-critical
 applications.
 
-### `asMap`
+### `asMap` -- asMap视图
 
 You can view any `Cache` as a `ConcurrentMap` using its `asMap` view, but how
 the `asMap` view interacts with the `Cache` requires some explanation.
@@ -395,7 +387,7 @@ the `asMap` view interacts with the `Cache` requires some explanation.
     `cache.asMap().entrySet()` does not reset access time for the entries you
     retrieve.
 
-## Interruption
+## Interruption -- 中断
 
 Loading methods (like `get`) never throw `InterruptedException`. We could have
 designed these methods to support `InterruptedException`, but our support would
