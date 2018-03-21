@@ -46,11 +46,8 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
 我们可以将元素通过 `Cache.put` 方法直接插入，但是采用自动加载仍然是首选方案，因为它可以更容易的推断缓存内容的一致性。
 
 #### From a CacheLoader -- Cache加载器
-
-A `LoadingCache` is a `Cache` built with an attached [`CacheLoader`]. Creating a
-`CacheLoader` is typically as easy as implementing the method `V load(K key)
-throws Exception`. So, for example, you could create a `LoadingCache` with the
-following code:
+`LoadingCache` 是附带 [`CacheLoader`] 构建的一个缓存实现。构建一个 `CacheLoader` 非常容易,
+你只需要实现 `V load(K key) throws Exception` 方法。举个简单的栗子，你可以模仿下面的代码创建一个`LoadingCache`。
 
 ``` java
 LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
@@ -106,12 +103,9 @@ value of any key from some group gives you the value for all keys in the group,
 
 #### From a Callable -- 回调
 
-All Guava caches, loading or not, support the method [`get(K, Callable<V>)`].
-This method returns the value associated with the key in the cache, or computes
-it from the specified `Callable` and adds it to the cache. No observable state
-associated with this cache is modified until loading completes. This method
-provides a simple substitute for the conventional "if cached, return; otherwise
-create, cache and return" pattern.
+所有的 Guava caches, 不管有没有自动加载，都支持 [`get(K, Callable<V>)`] 方法。
+这个方法返回了缓存中相对应的值，或者对特定`Callable` 返回的值进行计算，并将结果添加到缓存中。
+在加载完成之间，缓存的可观察状态都不会改变，这个方法简单的实现了“如果缓存，返回；否则计算、缓存然后返回”。
 
 ``` java
 Cache<Key, Value> cache = CacheBuilder.newBuilder()
@@ -133,6 +127,8 @@ try {
 ```
 
 #### Inserted Directly -- 显示插入
+
+值可以通过 [`cache.put(key, value)`] 方法显示的插入到缓存中。这会覆盖掉这个key以前所映射的任何的值。
 
 Values may be inserted into the cache directly with [`cache.put(key, value)`].
 This overwrites any previous entry in the cache for the specified key. Changes
