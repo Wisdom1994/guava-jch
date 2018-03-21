@@ -40,13 +40,10 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
 
 ## Population -- 成员
 
-The first question to ask yourself about your cache is: is there some _sensible
-default_ function to load or compute a value associated with a key? If so, you
-should use a `CacheLoader`. If not, or if you need to override the default, but
-you still want atomic "get-if-absent-compute" semantics, you should pass a
-`Callable` into a `get` call. Elements can be inserted directly, using
-`Cache.put`, but automatic cache loading is preferred as it makes it easier to
-reason about consistency across all cached content.
+关于你的缓存，你首先应该问自己一个问题：有没有一个 **合理、默认** 的方法去加载或者计算一个与键关联的值?
+如果有，你应该采用 `CacheLoader`，如果没有，或者你想要重写默认的 **加载-计算** 方法，而且希望保有 **获取缓存-若没有-进行计算**
+[get-if-absent-compute] 的原始语义(实现思路), 你应该在调用`get` 方法时传入(pass)一个`Callable`实例。
+我们可以将元素通过 `Cache.put` 方法直接插入，但是采用自动加载仍然是首选方案，因为它可以更容易的推断缓存内容的一致性。
 
 #### From a CacheLoader -- Cache加载器
 
