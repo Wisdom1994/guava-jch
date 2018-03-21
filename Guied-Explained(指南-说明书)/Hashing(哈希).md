@@ -33,7 +33,7 @@ HashCode hc = hf.newHasher()
 #### Hasher (哈希对象)
 
 一个 `HashFunciton` 可以提供一个有状态的 [`Hasher`]，它提供了可以将输入数据十分快速的计算出哈希值的方法。
-`Hasher` 可以接受任何形式的数据，byte arrays(字节数组)、byte arrays(字节数组的片段)、character squences(特定字符集的字符序列)等等，
+`Hasher` 可以接受任何形式的数据，byte arrays(字节数组)、slices of byte arrays(字节数组的片段)、character squences(特定字符集的字符序列)等等，
 或者是任何一个提供了 `Funnel` 实现的对象。
 
 `Hasher` 实现了 `PrimitiveSink` 接口，为 **一个接受原生数据类型的流的对象** 定义了 fluent 风格的 API。
