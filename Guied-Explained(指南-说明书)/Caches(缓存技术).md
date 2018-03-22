@@ -397,25 +397,14 @@ the `asMap` view interacts with the `Cache` requires some explanation.
 这种想法是很有价值的. 但是很多情况下,缓存只使用在单个线程中, 它们的用户仍然需要catch(捕获)那个不可能被抛出的 `InterruptedException` 异常.
 那些跨线程共享缓存的用户也只是在**有的时候**中断它们的`get`调用，这个时间取决于哪个线程先发出了请求。
 
-Our guiding principle in this decision is for the cache to behave as though all
-values are loaded in the calling thread. This principle makes it easy to
-introduce caching into code that previously recomputed its values on each call.
-And if the old code wasn't interruptible, then it's probably OK for the new code
-not to be, either.
+我们的一个设计原则是：让缓存看上去只是在当前线程中加载值。这个原则使得 **每次将caching引入代码预先计算它的值** 变得容易实现.
+如果老代码不能被中断，那么新的代码同样是不能被中断的。
 
-I said that we support interruption "in a sense." There's another sense in which
-we don't, making `LoadingCache` a leaky abstraction. If the loading thread is
-interrupted, we treat this much like any other exception. That's fine in many
-cases, but it's not the right thing when multiple `get` calls are waiting for
-the value. Although the operation that happened to be computing the value was
-interrupted, the other operations that need the value might not have been. Yet
-all of these callers receive the `InterruptedException` (wrapped in an
-`ExecutionException`), even though the load didn't so much "fail" as "abort."
-The right behavior would be for one of the remaining threads to retry the load.
-We have [a bug filed for this](https://github.com/google/guava/issues/1122).
-However, a fix could be risky. Instead of fixing the problem, we may put
-additional effort into a proposed `AsyncLoadingCache`, which would return
-`Future` objects with correct interruption behavior.
+所以说**在某种意义上**我们(Guava) 支持中断, 而在另一个意义上来说, 我们(Guava)又不支持, 这使得 `LoadingCache` 是一个有漏洞的抽象：
+如果加载中线程被中断了, 我们将它当做其他异常一样进行处理, 这在某些情况下来说是可以的; 但是当多个`get` 线程等待加载同一个缓存项时,
+就是不正确的, 这种情况下, 即使这个**计算中**线程被中断了, 其他的线程(也捕获到了`InterruptedException`异常)也不应都失败,
+正确的行为是让某个线程重新加载。为此，我们记录了一个 [bug](https://github.com/google/guava/issues/1122). 然而,
+逾期冒风险修复这个bug，不如花更多的精力去设计一个 `AsyncLoadingCache`(同步的), 这个实现会返回一个具有可中断行为的 `Future` 对象。
 
 [`CacheLoader`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/cache/CacheLoader.html
 [`get(K)`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/cache/LoadingCache.html#get-K-
