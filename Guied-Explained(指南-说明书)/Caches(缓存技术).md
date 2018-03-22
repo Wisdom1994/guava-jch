@@ -17,37 +17,37 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
 
 ## Applicability -- 适用于
 
-缓存在很多场景下都非常有用。比如，当计算或者搜索一个值的开销特别大、或者需要多次获取同一个输出而产生的值的时候。
+缓存在很多场景下都非常有用.比如,当计算或者搜索一个值的开销特别大、或者需要多次获取同一个输出而产生的值的时候.
 
-`Cache` 有些类似于 Java 集合类中的 `ConcurrentMap`, 但又不是完全相同。
+`Cache` 有些类似于 Java 集合类中的 `ConcurrentMap`, 但又不是完全相同.
 最基本的不同之处在于 `ConcurrentMap` 会保存所有的元素直到这些元素被显示的移除,
-而 `Cache` 为了限制内存占用通常会被设置为自动清理元素。在某些情况下,
-尽管`LoadingCache` 从不回收元素，它也是很有用的，它会在必要的时候自动加载缓存。 
+而 `Cache` 为了限制内存占用通常会被设置为自动清理元素.在某些情况下,
+尽管`LoadingCache` 从不回收元素,它也是很有用的,它会在必要的时候自动加载缓存. 
 
 总的来说, Guava 缓存适用于以下几个方面：
 
-*   你愿意使用更多的内存来提升速度(空间换时间)。
-*   你预料到某些键将会被使用一次以上。
-*   缓存数据量不会超过你的内存大小。(Guava caches 是你应用程序上单线程的本地缓存, 数据不会存储到文件或者外部服务器中。
-    如果这满足不了你的需求，请考虑一下比如 [Memcached](http://memcached.org/) 的工具。(注：[Redis](https://redis.io) 也可以))
+*   你愿意使用更多的内存来提升速度(空间换时间).
+*   你预料到某些键将会被使用一次以上.
+*   缓存数据量不会超过你的内存大小.(Guava caches 是你应用程序上单线程的本地缓存, 数据不会存储到文件或者外部服务器中.
+    如果这满足不了你的需求,请考虑一下比如 [Memcached](http://memcached.org/) 的工具.(注：[Redis](https://redis.io) 也可以))
 
-如果你的应用场景符合上边的每一条，Guava Caches 就非常满足你的要求。
+如果你的应用场景符合上边的每一条,Guava Caches 就非常满足你的要求.
 
-如同示例一样，`Cache` 可以通过 `CacheBuilder` 来生成，但是自定义你的 `Cache` 才是最有趣的一部分。 
+如同示例一样,`Cache` 可以通过 `CacheBuilder` 来生成,但是自定义你的 `Cache` 才是最有趣的一部分. 
 
-注：如果你不需要 `Cache` 的一些特性，`ConcurrentHashMap` 有更优的内存效率,
-但是通过 `ConcurrentMap` 来复制(实现) `Cache` 的一些特性却是极其困难或者说是不可能的。
+注：如果你不需要 `Cache` 的一些特性,`ConcurrentHashMap` 有更优的内存效率,
+但是通过 `ConcurrentMap` 来复制(实现) `Cache` 的一些特性却是极其困难或者说是不可能的.
 
 ## Population -- 成员
 
-关于你的缓存，你首先应该问自己一个问题：有没有一个 **合理、默认** 的方法去加载或者计算一个与键关联的值?
-如果有，你应该采用 `CacheLoader`，如果没有，或者你想要重写默认的 **加载-计算** 方法，而且希望保有 **获取缓存-若没有-进行计算**
-[get-if-absent-compute] 的原始语义(实现思路), 你应该在调用`get` 方法时传入(pass)一个`Callable`实例。
-我们可以将元素通过 `Cache.put` 方法直接插入，但是采用自动加载仍然是首选方案，因为它可以更容易的推断缓存内容的一致性。
+关于你的缓存,你首先应该问自己一个问题：有没有一个 **合理、默认** 的方法去加载或者计算一个与键关联的值?
+如果有,你应该采用 `CacheLoader`,如果没有,或者你想要重写默认的 **加载-计算** 方法,而且希望保有 **获取缓存-若没有-进行计算**
+[get-if-absent-compute] 的原始语义(实现思路), 你应该在调用`get` 方法时传入(pass)一个`Callable`实例.
+我们可以将元素通过 `Cache.put` 方法直接插入,但是采用自动加载仍然是首选方案,因为它可以更容易的推断缓存内容的一致性.
 
 #### From a CacheLoader -- Cache加载器
-`LoadingCache` 是附带 [`CacheLoader`] 构建的一个缓存实现。构建一个 `CacheLoader` 非常容易,
-你只需要实现 `V load(K key) throws Exception` 方法。举个简单的栗子，你可以模仿下面的代码创建一个`LoadingCache`。
+`LoadingCache` 是附带 [`CacheLoader`] 构建的一个缓存实现.构建一个 `CacheLoader` 非常容易,
+你只需要实现 `V load(K key) throws Exception` 方法.举个简单的栗子,你可以模仿下面的代码创建一个`LoadingCache`.
 
 ``` java
 LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
@@ -103,9 +103,9 @@ value of any key from some group gives you the value for all keys in the group,
 
 #### From a Callable -- 回调
 
-所有的 Guava caches, 不管有没有自动加载，都支持 [`get(K, Callable<V>)`] 方法。
-这个方法返回了缓存中相对应的值，或者对特定`Callable` 返回的值进行计算，并将结果添加到缓存中。
-在加载完成之间，缓存的可观察状态都不会改变，这个方法简单的实现了“如果缓存，返回；否则计算、缓存然后返回”。
+所有的 Guava caches, 不管有没有自动加载,都支持 [`get(K, Callable<V>)`] 方法.
+这个方法返回了缓存中相对应的值,或者对特定`Callable` 返回的值进行计算,并将结果添加到缓存中.
+在加载完成之间,缓存的可观察状态都不会改变,这个方法简单的实现了“如果缓存,返回；否则计算、缓存然后返回”.
 
 ``` java
 Cache<Key, Value> cache = CacheBuilder.newBuilder()
@@ -128,10 +128,8 @@ try {
 
 #### Inserted Directly -- 显示插入
 
-值可以通过 [`cache.put(key, value)`] 方法显示的插入到缓存中。这会覆盖掉这个key以前所映射的任何的值。
-
-Values may be inserted into the cache directly with [`cache.put(key, value)`].
-This overwrites any previous entry in the cache for the specified key. Changes
+值可以通过 [`cache.put(key, value)`] 方法显示的插入到缓存中.这会覆盖掉这个key以前所映射的任何的值.
+. Changes
 can also be made to a cache using any of the `ConcurrentMap` methods exposed by
 the `Cache.asMap()` view. Note that no method on the `asMap` view will ever
 cause entries to be automatically loaded into the cache. Further, the atomic
@@ -382,34 +380,22 @@ the `asMap` view interacts with the `Cache` requires some explanation.
 
 ## Interruption -- 中断
 
-Loading methods (like `get`) never throw `InterruptedException`. We could have
-designed these methods to support `InterruptedException`, but our support would
-have been incomplete, forcing its costs on all users but its benefits on only
-some. For details, read on.
+缓存加载方法(比如 `get` )从来不会抛出 `InterruptedException` 异常.我们应该设计一些方法去支持 `InterruptedException`,
+但是这种支持通常是不完善的,强迫增加所有使用者的开销,可是却只有少部分获益.
 
-`get` calls that request uncached values fall into two broad categories: those
-that load the value and those that await another thread's in-progress load. The
-two differ in our ability to support interruption. The easy case is waiting for
-another thread's in-progress load: Here we could enter an interruptible wait.
-The hard case is loading the value ourselves. Here we're at the mercy of the
-user-supplied `CacheLoader`. If it happens to support interruption, we can
-support interruption; if not, we can't.
+`get` 请求到未缓存的值时通常是因为两个方面：一个是 **当前线程加载值**；二是 **等待另一个加载值的线程**.
+所以我们支持中断的两种方式是不一样的.**等待另一个加载值的线程** 是较为简单的一种情况：这里我们可以加入一个中断等待；
+**当前线程加载值** 的中断就比较困难：线程运行在用户提供的`CacheLoader`中,如果它是可中断的,我们就可以实现对中断的支持,
+如果不可中断,那么就不行.
 
-So why not support interruption when the supplied `CacheLoader` does? In a
-sense, we do (but see below): If the `CacheLoader` throws
-`InterruptedException`, all `get` calls for the key will return promptly (just
-as with any other exception). Plus, `get` will restore the interrupt bit in the
-loading thread. The surprising part is that the `InterruptedException` is
-wrapped in an `ExecutionException`.
+所以为什么用户提供的`CacheLoader` 是可中断的,而 `get` 却不提供显示的支持? 某种意义上来说,我们提供了支持:
+如果一个 `CacheLoader` 抛出了一个 `InterruptedException` 异常,`get` 方法将立刻返回 key 值(与其他的异常情况相同).
+此外,在正在执行的线程中,`get` 捕捉到`InterruptedException` 后将会恢复中断,其他的线程则将 `InterruptedException` 包装成 `ExecutionException`.
 
-In principle, we could unwrap this exception for you. However, this forces all
-`LoadingCache` users to handle `InterruptedException`, even though the majority
-of `CacheLoader` implementations never throw it. Maybe that's still worthwhile
-when you consider that all _non-loading_ threads' waits could still be
-interrupted. But many caches are used only in a single thread. Their users must
-still catch the impossible `InterruptedException`. And even those users who
-share their caches across threads will be able to interrupt their `get` calls
-only _sometimes_, based on which thread happens to make a request first.
+原则上来说,我们可以将 `ExecutionException` 接封装为 `InterruptedException`,但是这会导致所有的 `LoadingCache` 的使用者都要处理异常,
+尽管大部分的`CacheLoader` 的实现都没有抛出这个异常. 你可能认为所有的**非加载线程** 的等待都应该可以被中断,
+这种想法是很有价值的. 但是很多情况下,缓存只使用在单个线程中, 它们的用户仍然需要catch(捕获)那个不可能被抛出的 `InterruptedException` 异常.
+那些跨线程共享缓存的用户也只是在**有的时候**中断它们的`get`调用，这个时间取决于哪个线程先发出了请求。
 
 Our guiding principle in this decision is for the cache to behave as though all
 values are loaded in the calling thread. This principle makes it easy to
