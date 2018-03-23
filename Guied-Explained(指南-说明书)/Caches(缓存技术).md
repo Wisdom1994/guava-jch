@@ -362,21 +362,13 @@ applications.
 
 ### `asMap` -- asMap视图
 
-You can view any `Cache` as a `ConcurrentMap` using its `asMap` view, but how
-the `asMap` view interacts with the `Cache` requires some explanation.
+你可以使用 `ConcurrentMap` 的 `asMap` 来创建一个缓存视图，但是对于 `asMap` 视图和缓存的交互机制，这里要作一些解释：
 
-*   `cache.asMap()` contains all entries that are _currently loaded_ in the
-    cache. So, for example, `cache.asMap().keySet()` contains all the currently
-    loaded keys.
-*   `asMap().get(key)` is essentially equivalent to `cache.getIfPresent(key)`,
-    and never causes values to be loaded. This is consistent with the `Map`
-    contract.
-*   Access time is reset by all cache read and write operations (including
-    `Cache.asMap().get(Object)` and `Cache.asMap().put(K, V)`), but not by
-    `containsKey(Object)`, nor by operations on the collection-views of
-    `Cache.asMap()`. So, for example, iterating through
-    `cache.asMap().entrySet()` does not reset access time for the entries you
-    retrieve.
+*   `cache.asMap()` 包含所有加载到缓存中的项,比如`cache.asMap().keySet()` 包含了所有已经加载到缓存中的 key 值。
+*   `asMap().get(key)` 本质上相当于 `cache.getIfPresent(key)`，而且不会引起缓存项得加载, 这与 `Map` 语义约定一致。
+*   所有缓存项的读写操作都会重置相关缓存项的读取时间(包括`Cache.asMap().get(Object)` 和 `Cache.asMap().put(K, V)`),
+但是 `containsKey(Object)` 方法不包括在其中，同样也不包含 `Cache.asMap()` 方法在集合视图上的操作.
+比如遍历`cache.asMap().entrySet()` 就不会重置缓存项的读取时间。
 
 ## Interruption -- 中断
 
