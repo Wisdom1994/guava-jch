@@ -347,18 +347,14 @@ after it comes eligible for refreshing, it is allowed to expire.
 
 ### Statistics -- 统计(对Caches工作状态的统计)
 
-By using [`CacheBuilder.recordStats()`], you can turn on statistics collection
-for Guava caches. The [`Cache.stats()`] method returns a [`CacheStats`] object,
-which provides statistics such as
+通过使用 [`CacheBuilder.recordStats()`] 方法开启 Guava cache 的统计功能。统计开启后,
+[`Cache.stats()`]方法返回一个[`CacheStats`]对象，里面提供了如下的统计信息：
 
-*   [`hitRate()`], which returns the ratio of hits to requests
-*   [`averageLoadPenalty()`], the average time spent loading new values, in
-    nanoseconds
-*   [`evictionCount()`], the number of cache evictions
+*   [`hitRate()`],返回缓存的命中率
+*   [`averageLoadPenalty()`], 返回加载新值的平均时间，单位为纳秒(nanoseconds)
+*   [`evictionCount()`], 被回收的缓存数量。
 
-and many more statistics besides. These statistics are critical in cache tuning,
-and we advise keeping an eye on these statistics in performance-critical
-applications.
+还有很多其他的统计信息，这些信息对于调整缓存设置至关重要，在一些特别要求性能的应用中，我们应该对此保持密切关注。
 
 ### `asMap` -- asMap视图
 
