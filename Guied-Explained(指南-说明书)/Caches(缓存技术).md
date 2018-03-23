@@ -66,15 +66,12 @@ try {
 }
 ```
 
-The canonical way to query a `LoadingCache` is with the method [`get(K)`]. This
-will either return an already cached value, or else use the cache's
-`CacheLoader` to atomically load a new value into the cache. Because
-`CacheLoader` might throw an `Exception`, `LoadingCache.get(K)` throws
-`ExecutionException`. (If the cache loader throws an _unchecked_ exception,
-`get(K)` will throw an `UncheckedExecutionException` wrapping it.) You can also
-choose to use `getUnchecked(K)`, which wraps all exceptions in
-`UncheckedExecutionException`, but this may lead to surprising behavior if the
-underlying `CacheLoader` would normally throw checked exceptions.
+获取一个 `LoadingCache` 的标准方式是使用[`get(K)`]方法，这个方法要么返回一个准备好的(已缓存)的值,
+要么使用缓存的`CacheLoader` **原子性** 的向缓存中加载新的值。因为 `CacheLoader` 可能抛出 `Exception`,
+`LoadingCache.get(K)` 也会抛出一个`ExecutionException`(如果缓存加载器抛出一个**非检查时异常**,
+那么`get(K)`就会返回一个包装过的`UncheckedExecutionException` 异常)。
+如果你的 `CacheLoader` 没有声明任何检查时异常, 你可以使用 `getUnchecked(K)` (包装了所有的`UncheckedExecutionException`).
+如果它声明了检查时异常，那么这就会造成一些令人惊讶的(难以解决)的问题(不能使用 `getUnchecked(K)`);
 
 ``` java
 LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
