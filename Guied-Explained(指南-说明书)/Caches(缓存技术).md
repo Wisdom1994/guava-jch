@@ -121,14 +121,9 @@ try {
 #### Inserted Directly -- 显示插入
 
 值可以通过 [`cache.put(key, value)`] 方法显示的插入到缓存中.这会覆盖掉这个key以前所映射的任何的值.
-. Changes
-can also be made to a cache using any of the `ConcurrentMap` methods exposed by
-the `Cache.asMap()` view. Note that no method on the `asMap` view will ever
-cause entries to be automatically loaded into the cache. Further, the atomic
-operations on that view operate outside the scope of automatic cache loading, so
-`Cache.get(K, Callable<V>)` should always be preferred over
-`Cache.asMap().putIfAbsent` in caches which load values using either
-`CacheLoader` or `Callable`.
+使用 `Cache.asMap()` 提供的任何 `ConcurrentMap` 方法也能修改缓存。*注：`asMap` 中的任何方法都不能使缓存项自动的加载到缓存中*.
+进一步来说，视图的原子运算是在缓存的自动加载范围之外的, 所以使用`CacheLoader` 或者 `Callable` 加载缓存项的时候,
+`Cache.get(K, Callable<V>)` 总是优先于 `Cache.asMap().putIfAbsent` 被使用。
 
 ## Eviction -- 内存回收
 
