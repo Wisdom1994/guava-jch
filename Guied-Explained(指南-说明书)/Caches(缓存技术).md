@@ -127,6 +127,9 @@ try {
 
 ## Eviction -- 内存回收
 
+现在有个非常残酷的现实：那就是肯定没有足够的内存来缓存我们需要缓存的内容.
+你必须要决定某个项什么时候不需要保留了? Guava Cache 提供了三种内存回收的方式:
+基于内存大小的回收、超时回收和基于引用的回收。
 The cold hard reality is that we almost _certainly_ don't have enough memory to
 cache everything we could cache. You must decide: when is it not worth keeping a
 cache entry? Guava provides three basic types of eviction: size-based eviction,
