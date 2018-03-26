@@ -90,10 +90,8 @@ return graphs.getUnchecked(key);
 来对每一个key加载缓存项.你可以重写 [`CacheLoader.loadAll`] 去使一个批量加载的效率高于多个单独加载.
 `getAll(Iterable)` 的性能也会相应的提高。
 
-Note that you can write a `CacheLoader.loadAll` implementation that loads values
-for keys that were not specifically requested. For example, if computing the
-value of any key from some group gives you the value for all keys in the group,
-`loadAll` might load the rest of the group at the same time.
+注：你可以用一个 `CacheLoader.loadAll` 来实现为“没有明确请求的键”加载缓存值的功能。例如,
+你要计算一个可以提供所有键值的组中的任意键的值, 采用`loadAll` 就可以同时获取到组中的其他键值。
 
 #### From a Callable -- 回调
 
