@@ -130,25 +130,17 @@ try {
 现在有个非常残酷的现实：那就是肯定没有足够的内存来缓存我们需要缓存的内容.
 你必须要决定某个项什么时候不需要保留了? Guava Cache 提供了三种内存回收的方式:
 基于内存大小的回收、超时回收和基于引用的回收。
-The cold hard reality is that we almost _certainly_ don't have enough memory to
-cache everything we could cache. You must decide: when is it not worth keeping a
-cache entry? Guava provides three basic types of eviction: size-based eviction,
-time-based eviction, and reference-based eviction.
 
 ### Size-based Eviction -- 基于内存大小的回收(超出你设置的内存大小)
 
-If your cache should not grow beyond a certain size, just use
-[`CacheBuilder.maximumSize(long)`]. The cache will try to evict entries that
-haven't been used recently or very often. _Warning_: the cache may evict entries
-before this limit is exceeded -- typically when the cache size is approaching
-the limit.
+你可以使用 [`CacheBuilder.maximumSize(long)`] 来确定缓存空间的大小.
+缓存会尝试清除最近没有使用或者不常使用的缓存项.**警告：** 在缓存值达到你设定的限额之前,
+缓存也可能会开始清除操作——这通常发生在缓存量接近设定值的时候.
 
-Alternately, if different cache entries have different "weights" -- for example,
-if your cache values have radically different memory footprints -- you may
-specify a weight function with [`CacheBuilder.weigher(Weigher)`] and a maximum
-cache weight with [`CacheBuilder.maximumWeight(long)`]. In addition to the same
-caveats as `maximumSize` requires, be aware that weights are computed at entry
-creation time, and are static thereafter.
+另一种方式来说，不同的缓存项拥有不同的“权重”. 举个栗子来说：如果你的缓存值占据着不同的内存空间,
+你可以使用 [`CacheBuilder.weigher(Weigher)`] 来指定一个权重函数, 同时用  [`CacheBuilder.maximumWeight(long)`]
+来指定缓存总量大小. 在有着权重限定的场景中，除了数量接近限定值会开始内存回收之外，还要注意到权重的计算,
+计算结果临近限定值时也会开始内存回收。
 
 ``` java
 LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
