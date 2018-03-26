@@ -86,12 +86,9 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
 ...
 return graphs.getUnchecked(key);
 ```
-
-Bulk lookups can be performed with the method `getAll(Iterable<? extends K>)`.
-By default, `getAll` will issue a a separate call to `CacheLoader.load` for each
-key which is absent from the cache. When bulk retrieval is more efficient than
-many individual lookups, you can override [`CacheLoader.loadAll`] to exploit
-this. The performance of `getAll(Iterable)` will improve accordingly.
+`getAll(Iterable<? extends K>)`方法可以用来进行批量查询操作，默认情况下，`getAll`一般采用 `CacheLoader.load`
+来对每一个key加载缓存项.你可以重写 [`CacheLoader.loadAll`] 去使一个批量加载的效率高于多个单独加载.
+`getAll(Iterable)` 的性能也会相应的提高。
 
 Note that you can write a `CacheLoader.loadAll` implementation that loads values
 for keys that were not specifically requested. For example, if computing the
