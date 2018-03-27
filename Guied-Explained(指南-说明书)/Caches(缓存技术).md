@@ -196,12 +196,13 @@ references] for values.
 
 ### Explicit Removals -- 显示移除
 
+在任何时间, 你都可以指定移除某一缓存项, 而不是等待它被系统回收,你可以采用以下几个方法:
 At any time, you may explicitly invalidate cache entries rather than waiting for
 entries to be evicted. This can be done:
 
-*   individually, using [`Cache.invalidate(key)`]
-*   in bulk, using [`Cache.invalidateAll(keys)`]
-*   to all entries, using [`Cache.invalidateAll()`]
+*   单项移除, 使用 [`Cache.invalidate(key)`] 方法
+*   部分移除, 使用 [`Cache.invalidateAll(keys)`] 方法
+*   全部移除, 使用 [`Cache.invalidateAll()`] 方法
 
 ### Removal Listeners -- 移除时监听器
 
