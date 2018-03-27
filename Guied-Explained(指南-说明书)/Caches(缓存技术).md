@@ -173,26 +173,16 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
 
 ### Reference-based Eviction -- 基于引用的回收
 
-Guava allows you to set up your cache to allow the garbage collection of
-entries, by using [weak references] for keys or values, and by using [soft
-references] for values.
+通过使用弱引用 [weak references] 来标记键和值、使用软引用 [soft references] 来标记值,
+Guava 允许你将缓存设置为垃圾回收(将你的缓存项存入垃圾集合).
 
-*   [`CacheBuilder.weakKeys()`] stores keys using weak references. This allows
-    entries to be garbage-collected if there are no other (strong or soft)
-    references to the keys. Since garbage collection depends only on identity
-    equality, this causes the whole cache to use identity (`==`) equality to
-    compare keys, instead of `equals()`.
-*   [`CacheBuilder.weakValues()`] stores values using weak references. This
-    allows entries to be garbage-collected if there are no other (strong or
-    soft) references to the values. Since garbage collection depends only on
-    identity equality, this causes the whole cache to use identity (`==`)
-    equality to compare values, instead of `equals()`.
-*   [`CacheBuilder.softValues()`] wraps values in soft references. Softly
-    referenced objects are garbage-collected in a globally least-recently-used
-    manner, _in response to memory demand_. Because of the performance
-    implications of using soft references, we generally recommend using the more
-    predictable [maximum cache size][size-based eviction] instead. Use of `softValues()` will cause
-    values to be compared using identity (`==`) equality instead of `equals()`.
+*   [`CacheBuilder.weakKeys()`] 将键标记为弱引用. 当这个键没有其他的引用方式(强引用或软引用)时,缓存项可以被垃圾回收.
+    因为垃圾回收依赖于强一致(恒等), 所以这导致了这些 "弱引用键的缓存" 采用 `==` 而不是 `equals()` 来比较键。
+*   [`CacheBuilder.weakValues()`] 将值标记为弱引用. 当这个值没有其他的引用方式(强引用或软引用)时,缓存项可以被垃圾回收.
+    因为垃圾回收依赖于强一致(恒等), 所以这导致了这些 "弱引用键的缓存" 采用 `==` 而不是 `equals()` 来比较值。
+*   [`CacheBuilder.softValues()`] 将值标记为软引用. 软引用只是在需要释放内存时才进行垃圾回收, 而且是选择全局最近最少使用的缓存项.
+    考虑到使用软引用时导致的一些性能影响, 我们建议采用更有预测性的方法如 **设定缓存最大值**(基于大小的回收策略)
+    来进行一些限定。`softValues()` 同样采用 `==` 而不是 `equals()` 来比较值。
 
 ### Explicit Removals -- 显示移除
 
