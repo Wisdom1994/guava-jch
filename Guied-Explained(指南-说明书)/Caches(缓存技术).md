@@ -167,12 +167,9 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
 
 就像讨论中的那样, 超时回收周期性的在写操作中执行, 偶尔也在读操作中执行。
 
-#### Testing Timed Eviction -- 测试定时回收
-
-Testing timed eviction doesn't have to be painful...and doesn't actually have to
-take you two seconds to test a two-second expiration. Use the [Ticker] interface
-and the [`CacheBuilder.ticker(Ticker)`] method to specify a time source in your
-cache builder, rather than having to wait for the system clock.
+#### Testing Timed Eviction -- 超时回收的测试
+对于超时回收的测试, 不是一定需要痛苦的等待的...也就是说, 并不是一个两秒的超时回收就一定要等待两秒钟去进行测试.
+使用 [Ticker] 接口和 [`CacheBuilder.ticker(Ticker)`] 方法在你的缓存中自定义一个时间源, 以此来代替系统时钟。
 
 ### Reference-based Eviction -- 基于引用的回收
 
