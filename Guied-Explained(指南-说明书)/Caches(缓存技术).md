@@ -160,19 +160,12 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
 
 ### Timed Eviction -- 超时回收
 
-`CacheBuilder` provides two approaches to timed eviction:
+`CacheBuilder` 提供了超时回收的两种方式：
 
-*   [`expireAfterAccess(long, TimeUnit)`] Only expire entries after the
-    specified duration has passed since the entry was last accessed by a read or
-    a write. Note that the order in which entries are evicted will be similar to
-    that of [size-based eviction].
-*   [`expireAfterWrite(long, TimeUnit)`] Expire entries after the specified
-    duration has passed since the entry was created, or the most recent
-    replacement of the value. This could be desirable if cached data grows stale
-    after a certain amount of time.
+*   [`expireAfterAccess(long, TimeUnit)`] 缓存项在限制时间内没有读/写操作, 它就将被回收.注:这种方式下的回收顺序与基于大小的回收 [size-based eviction] 相同。
+*   [`expireAfterWrite(long, TimeUnit)`] 缓存项在限制时间内没有进行写访问(创建/覆盖键值)则回收。如果缓存项被认为在一段时间后变得陈旧不可用，就可以采用此种方式。
 
-Timed expiration is performed with periodic maintenance during writes and
-occasionally during reads, as discussed below.
+就像讨论中的那样, 超时回收周期性的在写操作中执行, 偶尔也在读操作中执行。
 
 #### Testing Timed Eviction -- 测试定时回收
 
