@@ -187,8 +187,6 @@ Guava 允许你将缓存设置为垃圾回收(将你的缓存项存入垃圾集�
 ### Explicit Removals -- 显示移除
 
 在任何时间, 你都可以指定移除某一缓存项, 而不是等待它被系统回收,你可以采用以下几个方法:
-At any time, you may explicitly invalidate cache entries rather than waiting for
-entries to be evicted. This can be done:
 
 *   单项移除, 使用 [`Cache.invalidate(key)`] 方法
 *   部分移除, 使用 [`Cache.invalidateAll(keys)`] 方法
@@ -196,13 +194,10 @@ entries to be evicted. This can be done:
 
 ### Removal Listeners -- 移除时监听器
 
-You may specify a removal listener for your cache to perform some operation when
-an entry is removed, via [`CacheBuilder.removalListener(RemovalListener)`]. The
-[`RemovalListener`] gets passed a [`RemovalNotification`], which specifies the
-[`RemovalCause`], key, and value.
-
-Note that any exceptions thrown by the `RemovalListener` are logged (using
-`Logger`) and swallowed.
+你可以通过 [`CacheBuilder.removalListener(RemovalListener)`] 声明一个 **移除时监听器**,
+这可以让你在移除一个缓存项的时候做点其他的事。通过 [`RemovalNotification`] 可以获取一个 [`RemovalListener`],
+需要一个[`RemovalCause`]移除原因、key和value, 如下面的代码:
+*注：`RemovalListener` 抛出的任何异常，都会在记录到日志中(使用 `Logger` 持久化)后被丢弃(swallowed)*
 
 ``` java
 CacheLoader<Key, DatabaseConnection> loader = new CacheLoader<Key, DatabaseConnection> () {
@@ -218,17 +213,14 @@ RemovalListener<Key, DatabaseConnection> removalListener = new RemovalListener<K
 };
 
 return CacheBuilder.newBuilder()
+  // 超时回收 2分钟
   .expireAfterWrite(2, TimeUnit.MINUTES)
   .removalListener(removalListener)
   .build(loader);
 ```
 
-**警告**: removal listener operations are executed synchronously by default,
-and since cache maintenance is normally performed during normal cache
-operations, expensive removal listeners can slow down normal cache function! If
-you have an expensive removal listener, use
-[`RemovalListeners.asynchronous(RemovalListener, Executor)`] to decorate a
-`RemovalListener` to operate asynchronously.
+**警告**:默认情况下,移除监听器的触发是和缓存项移除同步进行的, 此时, 性能开销巨大的监听器会拉低缓存效率!
+而此时, 你应该使用 [`RemovalListeners.asynchronous(RemovalListener, Executor)`] 来将监听器 `RemovalListener` 装饰为异步操作。
 
 ### 清理(内存释放)会在什么时候发生？
 
