@@ -224,25 +224,16 @@ return CacheBuilder.newBuilder()
 
 ### 清理(内存释放)会在什么时候发生？
 
-Caches built with `CacheBuilder` do _not_ perform cleanup and evict values
-"automatically," or instantly after a value expires, or anything of the sort.
-Instead, it performs small amounts of maintenance during write operations, or
-during occasional read operations if writes are rare.
+使用 `CacheBuilder` 构建的缓存**不会**自动的进行清理或者回收值的操作, 也不会在超时后立即处理, 也没有如上所说的清理机制.
+相反的是, 它会在执行写操作的时候进行一小部分的维护工作, 如果写操作实在太少, 那么它也会偶尔在读操作的时候这样做.
 
-The reason for this is as follows: if we wanted to perform `Cache` maintenance
-continuously, we would need to create a thread, and its operations would be
-competing with user operations for shared locks. Additionally, some environments
-restrict the creation of threads, which would make `CacheBuilder` unusable in
-that environment.
+这样做的原因在于: 如果我们想不断的对缓存进行维护, 我们需要创建一个线程, 这个线程会和用户操作(读/写)竞争共享锁.
+此外, 在某些环境下会限制线程的创建, 那在这样的环境中 `CacheBuilder` 就不能用了。
 
-Instead, we put the choice in your hands. If your cache is high-throughput, then
-you don't have to worry about performing cache maintenance to clean up expired
-entries and the like. If your cache does writes only rarely and you don't want
-cleanup to block cache reads, you may wish to create your own maintenance thread
-that calls [`Cache.cleanUp()`] at regular intervals.
+对此, 我们将选择权交到你的手里. 如果你的缓存是高吞吐量, 那么你完全不用考虑超时清理等类似的维护工作;
+如果你的缓存只有一些小量的写操作而你又不希望维护线程阻碍你的读操作, 你就可以创建一个你自己的维护线程定期调用 [`Cache.cleanUp()`] 来进行维护.
 
-If you want to schedule regular cache maintenance for a cache which only rarely
-has writes, just schedule the maintenance using [`ScheduledExecutorService`].
+如果你想要你的维护线程只在少量的写操作时执行规定的缓存维护任务, [`ScheduledExecutorService`] 会给你提供有效的帮助.
 
 ### Refresh -- 刷新
 
