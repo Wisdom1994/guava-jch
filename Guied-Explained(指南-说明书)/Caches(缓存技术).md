@@ -237,27 +237,21 @@ return CacheBuilder.newBuilder()
 
 ### Refresh -- 刷新
 
-Refreshing is not quite the same as eviction. As specified in
-[`LoadingCache.refresh(K)`], refreshing a key loads a new value for the key,
-possibly asynchronously. The old value (if any) is still returned while the key
-is being refreshed, in contrast to eviction, which forces retrievals to wait
-until the value is loaded anew.
+刷新操作并不是与回收操作同步进行的. 正如 [`LoadingCache.refresh(K)`] 中指定声明的那样: 刷新指的是为一个 key 加载新的 value,
+可能是异步执行的.刷新过程中, 老的 value 仍然可以被返回(从缓冲中获取), 直到刷新完成; 不像回收, 读取缓存值必须要等回收结束.
 
-If an exception is thrown while refreshing, the old value is kept, and the
-exception is logged and swallowed.
+如果在刷新过程中抛出了一个异常, 那么旧值会被继续保留, 异常在记录到日志中后被丢弃。
 
-A `CacheLoader` may specify smart behavior to use on a refresh by overriding
-[`CacheLoader.reload(K, V)`], which allows you to use the old value in computing
-the new value.
+`CacheLoader` 支持开发者重写 [`CacheLoader.reload(K, V)`] 时加入个性化的操作, 比如允许你在计算新值时采用旧值数据。
 
 ``` java
-// Some keys don't need refreshing, and we want refreshes to be done asynchronously.
+// 有些键不需要刷新 所以我们希望刷新是异步操作的。
 LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
        .maximumSize(1000)
        .refreshAfterWrite(1, TimeUnit.MINUTES)
        .build(
            new CacheLoader<Key, Graph>() {
-             public Graph load(Key key) { // no checked exception
+             public Graph load(Key key) { // 没有检查异常
                return getGraphFromDatabase(key);
              }
 
@@ -265,7 +259,7 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
                if (neverNeedsRefresh(key)) {
                  return Futures.immediateFuture(prevGraph);
                } else {
-                 // asynchronous!
+                 // 异步操作！！！+-
                  ListenableFutureTask<Graph> task = ListenableFutureTask.create(new Callable<Graph>() {
                    public Graph call() {
                      return getGraphFromDatabase(key);
@@ -277,17 +271,11 @@ LoadingCache<Key, Graph> graphs = CacheBuilder.newBuilder()
              }
            });
 ```
-
-Automatically timed refreshing can be added to a cache using
-[`CacheBuilder.refreshAfterWrite(long, TimeUnit)`]. In contrast to
-`expireAfterWrite`, `refreshAfterWrite` will make a key _eligible_ for refresh
-after the specified duration, but a refresh will only be actually initiated when
-the entry is queried. (If `CacheLoader.reload` is implemented to be
-asynchronous, then the query will not be slowed down by the refresh.) So, for
-example, you can specify both `refreshAfterWrite` and `expireAfterWrite` on the
-same cache, so that the expiration timer on an entry isn't blindly reset
-whenever an entry becomes eligible for a refresh, so if an entry isn't queried
-after it comes eligible for refreshing, it is allowed to expire.
+缓存定时自动刷新可以添加到一个 [`CacheBuilder.refreshAfterWrite(long, TimeUnit)`] 中。
+相比于 `expireAfterWrite`, `refreshAfterWrite`通过定时刷新使缓存项在一定时间内可用, 但是缓存项只有在 key 
+被检索时才会真正的刷新(如果 `CacheLoader.reload` 已经实现异步, 那么检索性能/速度不会因为刷新而减慢).
+所以，你可以在同一个缓存上同时使用 `refreshAfterWrite` 和 `expireAfterWrite` , 缓存项不会因为触发刷新而盲目的重置,
+因为如果缓存项没有被检索, 那么刷新就不会真正的生效, 缓存项在过期之后也可以被回收。
 
 ## Features -- 特性
 
