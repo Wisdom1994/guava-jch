@@ -2,51 +2,50 @@
 
 ## Joiner
 
-Joining together a sequence of strings with a separator can be unnecessarily
-tricky -- but it shouldn't be. If your sequence contains nulls, it can be even
-harder. The fluent style of [`Joiner`] makes it simple.
+将被分隔符分割的字符串序列串联起来，可能会产生些不必要的麻烦, 如果你的字符串序列中包含几个 **null**,
+那连接操作将会更为困难, 那么 Fluent 风格的 [`Joiner`] 类就可以将连接操作变得非常容易.
 
 ``` java
+// skipNulls() 跳过 null , 忽略 null 在字符串中发挥的作用
 Joiner joiner = Joiner.on("; ").skipNulls();
 return joiner.join("Harry", null, "Ron", "Hermione");
 ```
 
-returns the string "Harry; Ron; Hermione". Alternately, instead of using
-`skipNulls`, you may specify a string to use instead of null with
-`useForNull(String)`.
+代码返回了 "Harry; Ron; Hermione" 字符串, 另外, 使用 `useForNull(String)` 方法,
+你可以使用任意字符串来代替 null.
 
-You may also use `Joiner` on objects, which will be converted using their
-`toString()` and then joined.
+``` java
+// 使用 useForNull(String) 方法，使用自定义字符串代替 null
+Joiner joiner = Joiner.on(";").useForNull("Hi");
+return joiner.join("Harry", null, "Ron", "Hermione");
+// 代码将会返回 Harry", "Hi", "Ron", "Hermione"
+```
+
+你也可以在对象中使用 `Joiner`, 这时, Joiner 会将对象的 `toString()` 值连接起来.
 
 ``` java
 Joiner.on(",").join(Arrays.asList(1, 5, 7)); // returns "1,5,7"
 ```
 
-**Warning:** joiner instances are always immutable. The joiner configuration
-methods will always return a new `Joiner`, which you must use to get the desired
-semantics. This makes any `Joiner` thread safe, and usable as a `static final`
-constant.
+**Warning:** joiner 的实例总是不可变的(具体请参考joiner的构造以及具体方法),
+也就是使用 joiner 的构造方法总会返回一个新的 `Joiner` 对象, 这使 `Joiner` 是线程安全的,
+所以你可以将其定义为一个 `static final` 常量.
 
-## Splitter
+## Splitter 分割(隔)
 
-The built in Java utilities for splitting strings can have some quirky
-behaviors. For example, `String.split` silently discards trailing separators,
-and `StringTokenizer` respects exactly five whitespace characters and nothing
-else.
+在 Java 内建的工具类中，字符串拆分工具总有着一些莫名奇妙的特性. 举个栗子,
+`String.split` 偷偷抛弃了结尾的分隔符, `StringTokenizer` 则只关心五个空白字符(" ","\t","\n","\r","\f") 不管其他.
 
-Quiz: What does `",a,,b,".split(",")` return?
+*问: 执行`",a,,b,".split(",")` 之后, 将会返回什么?*
 
 1.  `"", "a", "", "b", ""`
 1.  `null, "a", null, "b", null`
 1.  `"a", null, "b"`
 1.  `"a", "b"`
-1.  None of the above
+1.  以上都不对
 
-The correct answer is none of the above: `"", "a", "", "b"`. Only trailing empty
-strings are skipped. What is this I don't even.
-
-[`Splitter`] allows complete control over all this confusing behavior using a
-reassuringly straightforward fluent pattern.
+正确答案是第五项: 以上都不对. `"", "a", "", "b"` 才是最终的返回结果,只有结尾的空字符串被忽略了.
+[`Splitter`] 通过流畅、直白的代码风格对以上混乱的特性达到了完全的掌控。
 
 ``` java
 Splitter.on(',')
@@ -54,9 +53,9 @@ Splitter.on(',')
     .omitEmptyStrings()
     .split("foo,bar,,   qux");
 ```
-
-returns an `Iterable<String>` containing "foo", "bar", "qux". A `Splitter` may
-be set to split on any `Pattern`, `char`, `String`, or `CharMatcher`.
+返回一个迭代器 `Iterable<String>` 包含 "foo", "bar", "qux".
+`Splitter` 被设置成可以按照任何的 `Pattern(模式)`, `char(字符)`,
+`String(字符串)` 或者 `CharMatcher(字符匹配器)` 来对字符串进行拆分
 
 #### Base Factories
 
