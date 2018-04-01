@@ -57,9 +57,9 @@ Splitter.on(',')
 `Splitter` 被设置成可以按照任何的 `Pattern(模式)`, `char(字符)`,
 `String(字符串)` 或者 `CharMatcher(字符匹配器)` 来对字符串进行拆分
 
-#### Base Factories
+#### Base Factories 拆分器工厂
 
-Method                                                     | Description                                                                                                                         | Example
+Method 方法                                                    | Description 描述                                                                                                                    | Example 举例
 :--------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- | :------
 [`Splitter.on(char)`]                                      | Split on occurrences of a specific, individual character.                                                                           | `Splitter.on(';')`
 [`Splitter.on(CharMatcher)`]                               | Split on occurrences of any character in some category.                                                                             | `Splitter.on(CharMatcher.BREAKING_WHITESPACE)`<br>`Splitter.on(CharMatcher.anyOf(";,."))`
@@ -67,7 +67,7 @@ Method                                                     | Description        
 [`Splitter.on(Pattern)`]<br>[`Splitter.onPattern(String)`] | Split on a regular expression.                                                                                                      | `Splitter.onPattern("\r?\n")`
 [`Splitter.fixedLength(int)`]                              | Splits strings into substrings of the specified fixed length. The last piece can be smaller than `length`, but will never be empty. | `Splitter.fixedLength(3)`
 
-#### Modifiers
+#### Modifiers 调节器/修饰器
 
 Method                       | Description                                                                             | Example
 :--------------------------- | :-------------------------------------------------------------------------------------- | :------
