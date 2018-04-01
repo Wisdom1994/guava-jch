@@ -59,27 +59,26 @@ Splitter.on(',')
 
 #### Base Factories 拆分器工厂
 
-Method 方法                                                    | Description 描述                                                                                                                    | Example 举例
-:--------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- | :------
-[`Splitter.on(char)`]                                      | Split on occurrences of a specific, individual character.                                                                           | `Splitter.on(';')`
-[`Splitter.on(CharMatcher)`]                               | Split on occurrences of any character in some category.                                                                             | `Splitter.on(CharMatcher.BREAKING_WHITESPACE)`<br>`Splitter.on(CharMatcher.anyOf(";,."))`
-[`Splitter.on(String)`]                                    | Split on a literal `String`.                                                                                                        | `Splitter.on(", ")`
-[`Splitter.on(Pattern)`]<br>[`Splitter.onPattern(String)`] | Split on a regular expression.                                                                                                      | `Splitter.onPattern("\r?\n")`
-[`Splitter.fixedLength(int)`]                              | Splits strings into substrings of the specified fixed length. The last piece can be smaller than `length`, but will never be empty. | `Splitter.fixedLength(3)`
+Method 方法                                                    | Description 描述                                         | Example 举例                                                                           | Example 举例
+:--------------------------------------------------------- | :----------------------------------------------------------| :------
+[`Splitter.on(char)`]                                      | 按单个字符拆分                                           | `Splitter.on(';')`
+[`Splitter.on(CharMatcher)`]                               | 按字符匹配器拆分                                        | `Splitter.on(CharMatcher.BREAKING_WHITESPACE)`<br>`Splitter.on(CharMatcher.anyOf(";,."))`
+[`Splitter.on(String)`]                                    | 按照字符串拆分                                          | `Splitter.on(", ")`
+[`Splitter.on(Pattern)`]<br>[`Splitter.onPattern(String)`] | 按照正则表达式拆分                                   | `Splitter.onPattern("\r?\n")`
+[`Splitter.fixedLength(int)`]                              | 按照固定长度拆分,最后一段可能比指定长度要短, 但是不为空 | `Splitter.fixedLength(3)`
 
 #### Modifiers 调节器/修饰器
 
-Method                       | Description                                                                             | Example
+Method 方法                  | Description   描述                                                                      | Example 举个栗子
 :--------------------------- | :-------------------------------------------------------------------------------------- | :------
-[`omitEmptyStrings()`]       | Automatically omits empty strings from the result.                                      | `Splitter.on(',').omitEmptyStrings().split("a,,c,d")` returns `"a", "c", "d"`
-[`trimResults()`]            | Trims whitespace from the results; equivalent to `trimResults(CharMatcher.WHITESPACE)`. | `Splitter.on(',').trimResults().split("a, b, c, d")` returns `"a", "b", "c", "d"`
-[`trimResults(CharMatcher)`] | Trims characters matching the specified `CharMatcher` from results.                     | `Splitter.on(',').trimResults(CharMatcher.is('_')).split("_a ,_b_ ,c__")` returns `"a ", "b_ ", "c"`.
-[`limit(int)`]               | Stops splitting after the specified number of strings have been returned.               | `Splitter.on(',').limit(3).split("a,b,c,d")` returns `"a", "b", "c,d"`
+[`omitEmptyStrings()`]       | 从结果中自动忽略空字符串                                                              | `Splitter.on(',').omitEmptyStrings().split("a,,c,d")` 返回 `"a", "c", "d"`
+[`trimResults()`]            | 移除掉结果字符串中的前/后空格; 等效于 `trimResults(CharMatcher.WHITESPACE)`方法       | `Splitter.on(',').trimResults().split("a, b, c, d")` 返回 `"a", "b", "c", "d"`
+[`trimResults(CharMatcher)`] | 移除掉结果字符串中的匹配“字符串匹配器”的字符                                       | `Splitter.on(',').trimResults(CharMatcher.is('_')).split("_a ,_b_ ,c__")` 返回 `"a ", "b_ ", "c"`.
+[`limit(int)`]               | 限制拆分出的字符串数量                                                                 | `Splitter.on(',').limit(3).split("a,b,c,d")` 返回 `"a", "b", "c,d"`
 
-TODO: Map splitters
+备忘录: Map splitters Map 拆分器
 
-If you wish to get a `List`, just use
-`Lists.newArrayList(splitter.split(string))` or the like.
+如果你希望返回结果是一个 `List`, 只需要用类似 `Lists.newArrayList(splitter.split(string))` 的方法就好
 
 **Warning:** splitter instances are always immutable. The splitter configuration
 methods will always return a new `Splitter`, which you must use to get the
