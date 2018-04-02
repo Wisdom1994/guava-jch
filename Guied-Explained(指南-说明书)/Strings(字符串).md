@@ -167,13 +167,13 @@ Method 方法             | Description 描述
 另外,`CharMatcher` 有 [`negate()`], [`and(CharMatcher)`], 和 [`or(CharMatcher)`] 方法,
 这些方法提供了`CharMatcher` 的简单的布尔操作.
 
-### Using CharMatchers
+### Using CharMatchers 使用字符串匹配器
 
 `CharMatcher` provides a [wide variety] of methods to operate on occurrences of
 the specified characters in any `CharSequence`. There are more methods provided
 than we can list here, but some of the most commonly used are:
 
-Method                                      | Description
+Method 方法                                 | Description 描述
 :------------------------------------------ | :----------
 [`collapseFrom(CharSequence, char)`]        | Replace each group of consecutive matched characters with the specified character. For example, `WHITESPACE.collapseFrom(string, ' ')` collapses whitespaces down to a single space.
 [`matchesAllOf(CharSequence)`]              | Test if this matcher matches all characters in the sequence. For example, `ASCII.matchesAllOf(string)` tests if all characters in the string are ASCII.
