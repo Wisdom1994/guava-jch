@@ -27,14 +27,14 @@ return joiner.join("Harry", null, "Ron", "Hermione");
 Joiner.on(",").join(Arrays.asList(1, 5, 7)); // returns "1,5,7"
 ```
 
-**Warning:** joiner 的实例总是不可变的(具体请参考joiner的构造以及具体方法),
+**警告:** joiner 的实例总是不可变的(具体请参考joiner的构造以及具体方法),
 也就是使用 joiner 的构造方法总会返回一个新的 `Joiner` 对象, 这使 `Joiner` 是线程安全的,
 所以你可以将其定义为一个 `static final` 常量.
 
 ## Splitter 分割(隔)
 
 在 Java 内建的工具类中，字符串拆分工具总有着一些莫名奇妙的特性. 举个栗子,
-`String.split` 偷偷抛弃了结尾的分隔符, `StringTokenizer` 则只关心五个空白字符(" ","\t","\n","\r","\f") 不管其他.
+`String.split` 偷偷抛弃了结尾的分隔符, `StringTokenizer` 则只关心五种空白字符(" ","\t","\n","\r","\f") 不管其他.
 
 *问: 执行`",a,,b,".split(",")` 之后, 将会返回什么?*
 
@@ -80,10 +80,8 @@ Method 方法                  | Description   描述                           
 
 如果你希望返回结果是一个 `List`, 只需要用类似 `Lists.newArrayList(splitter.split(string))` 的方法就好
 
-**Warning:** splitter instances are always immutable. The splitter configuration
-methods will always return a new `Splitter`, which you must use to get the
-desired semantics. This makes any `Splitter` thread safe, and usable as a
-`static final` constant.
+**警告:** splitter 的实例也是不可变的(参考 joiner). 调用确定语义的构造方法生成一个 splitter 总是返回一个新的 `Splitter` 对象,
+这使得 `Splitter` 是线程安全的, 可以看作为 `static final` 常量.
 
 <!--
 <a href='Hidden comment:
@@ -94,10 +92,9 @@ All escapers in Guava extend the [http://google.github.io/guava/releases/snapsho
 '></a>
 -->
 
-## CharMatcher
+## CharMatcher 字符匹配器
 
-In olden times, our `StringUtil` class grew unchecked, and had many methods like
-these:
+在以前的版本中, Guava 的 `StringUtil` 类疯狂的扩大, 包含了很多类似下面的方法...
 
 *   `allAscii`
 *   `collapse`
@@ -112,19 +109,16 @@ these:
 *   `stripAndCollapse`
 *   `stripNonDigits`
 
-They represent a partial cross product of two notions:
+他们代表着两种设计概念：
 
-1.  what constitutes a "matching" character?
-1.  what to do with those "matching" characters?
+1.  什么才是匹配字符?
+1.  我们应该如何处理匹配字符?
 
-To simplify this morass, we developed `CharMatcher`.
+为了走出如上困境, 我们设计了 `CharMatcher`
 
-Intuitively, you can think of a `CharMatcher` as representing a particular class
-of characters, like digits or whitespace. Practically speaking, a `CharMatcher`
-is just a boolean predicate on characters -- indeed, `CharMatcher` implements
-[`Predicate<Character>`] -- but because it
-is so common to refer to "all whitespace characters" or "all lowercase letters,"
-Guava provides this specialized syntax and API for characters.
+直观的来看, 你可以将 `CharMatcher` 看作某种字符的具体描述, 比如 *数字* 或者 *空格字符*.
+实际来说, `CharMatcher` 就是对一个字符的 boolean 类型的判断 —— `CharMatcher` 的确实现了[`Predicate<Character>`],
+但是“所有的空白字符”或者“所有的小写字符”这样的工作实在是太过普遍, 所以我们为此提供了专门的语法和API.
 
 But the utility of a `CharMatcher` is in the _operations_ it lets you perform on
 occurrences of the specified class of characters: trimming, collapsing,
