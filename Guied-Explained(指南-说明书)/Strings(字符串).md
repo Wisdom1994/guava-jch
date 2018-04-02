@@ -120,22 +120,18 @@ All escapers in Guava extend the [http://google.github.io/guava/releases/snapsho
 实际来说, `CharMatcher` 就是对一个字符的 boolean 类型的判断 —— `CharMatcher` 的确实现了[`Predicate<Character>`],
 但是“所有的空白字符”或者“所有的小写字符”这样的工作实在是太过普遍, 所以我们为此提供了专门的语法和API.
 
-But the utility of a `CharMatcher` is in the _operations_ it lets you perform on
-occurrences of the specified class of characters: trimming, collapsing,
-removing, retaining, and much more. An object of type `CharMatcher` represents
-notion 1: what constitutes a matching character? It then provides many
-operations answering notion 2: what to do with those matching characters? The
-result is that API complexity increases linearly for quadratically increasing
-flexibility and power. Yay!
+但是在具体工作中, `CharMatcher` 中最实用的是对字符进行特定操作的方法：trimming(修剪:一般是前后空格),
+collapsing(折叠), removing(移除), retaining(保留) 等等更多... `CharMatcher` 的实例正是代表了以上设计概念: 
+1: 什么是匹配字符? 2: 如何处理匹配字符?  这使得难复杂度线性增长的 API 具有了越来越优秀的灵活性与功能性.
+耶O(∩_∩)O...
 
 ``` java
-String noControl = CharMatcher.javaIsoControl().removeFrom(string); // remove control characters
-String theDigits = CharMatcher.digit().retainFrom(string); // only the digits
-String spaced = CharMatcher.whitespace().trimAndCollapseFrom(string, ' ');
-  // trim whitespace at ends, and replace/collapse whitespace into single spaces
-String noDigits = CharMatcher.javaDigit().replaceFrom(string, "*"); // star out all digits
+String noControl = CharMatcher.javaIsoControl().removeFrom(string); // 移除 control 字符.
+String theDigits = CharMatcher.digit().retainFrom(string); // 仅保留数字
+String spaced = CharMatcher.whitespace().trimAndCollapseFrom(string, ' '); // 去掉两端空格, 中间多个空格变为一个
+String noDigits = CharMatcher.javaDigit().replaceFrom(string, "*"); // 用 * 替换所有的数字
 String lowerAndDigit = CharMatcher.javaDigit().or(CharMatcher.javaLowerCase()).retainFrom(string);
-  // eliminate all characters that aren't digits or lowercase
+  // 只保留小写字母和数字
 ```
 
 **Note:** `CharMatcher` deals only with `char` values; it does not understand
