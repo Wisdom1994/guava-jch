@@ -134,10 +134,8 @@ String lowerAndDigit = CharMatcher.javaDigit().or(CharMatcher.javaLowerCase()).r
   // 只保留小写字母和数字
 ```
 
-**Note:** `CharMatcher` deals only with `char` values; it does not understand
-supplementary Unicode code points in the range 0x10000 to 0x10FFFF. Such logical
-characters are encoded into a `String` using surrogate pairs, and a
-`CharMatcher` treats these just as two separate characters.
+**笔记:** `CharMatcher` 只能处理 `char` 类型的值; 它不能理解范围在 0x10000 与 0x10FFFF 之间的 Unicode code 增补字符.
+一些逻辑字符以 **代理对(surrgatee pairs)** 的形式编码到 String 中,而 `CharMatcher` 只能将这种字符看作两个独立的字符. 
 
 ### Obtaining CharMatchers
 
