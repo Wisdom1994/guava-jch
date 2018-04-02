@@ -135,11 +135,11 @@ String lowerAndDigit = CharMatcher.javaDigit().or(CharMatcher.javaLowerCase()).r
 ```
 
 **笔记:** `CharMatcher` 只能处理 `char` 类型的值; 它不能理解范围在 0x10000 与 0x10FFFF 之间的 Unicode code 增补字符.
-一些逻辑字符以 **代理对(surrgatee pairs)** 的形式编码到 String 中,而 `CharMatcher` 只能将这种字符看作两个独立的字符. 
+一些逻辑字符以 **代理对(surrgatee pairs)** 的形式编码到 String 中,而 `CharMatcher` 只能将这种字符看作两个独立的字符. l
 
-### Obtaining CharMatchers
+### Obtaining CharMatchers 获取字符串匹配器
 
-Many needs can be satisfied by the provided `CharMatcher` factory methods:
+`CharMatcher`  提供的工厂方法可以满足大部分的需求:
 
 *   [`any()`]
 *   [`none()`]
@@ -156,16 +156,16 @@ Many needs can be satisfied by the provided `CharMatcher` factory methods:
 *   [`ascii()`]
 *   [`singleWidth()`]
 
-Other common ways to obtain a `CharMatcher` include:
+可以获取一个 `CharMatcher` 的另外的普通方法:
 
-Method                  | Description
+Method 方法             | Description 描述
 :---------------------- | :----------
-[`anyOf(CharSequence)`] | Specify all the characters you wish matched. For example, `CharMatcher.anyOf("aeiou")` matches lowercase English vowels.
-[`is(char)`]            | Specify exactly one character to match.
-[`inRange(char, char)`] | Specify a range of characters to match, e.g. `CharMatcher.inRange('a', 'z')`.
+[`anyOf(CharSequence)`] | 指定你想要匹配的所有字符. 举个栗子: `CharMatcher.anyOf("aeiou")`匹配所有的小写元音字母.
+[`is(char)`]            | 匹配给定的单一字符.
+[`inRange(char, char)`] | 匹配给定的字符范围, 比如匹配从a-z的小写字母: `CharMatcher.inRange('a', 'z')`.
 
-Additionally, `CharMatcher` has [`negate()`], [`and(CharMatcher)`], and
-[`or(CharMatcher)`]. These provide simple boolean operations on `CharMatcher`.
+另外,`CharMatcher` 有 [`negate()`], [`and(CharMatcher)`], 和 [`or(CharMatcher)`] 方法,
+这些方法提供了`CharMatcher` 的简单的布尔操作.
 
 ### Using CharMatchers
 
