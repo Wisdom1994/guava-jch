@@ -185,18 +185,18 @@ Method 方法                                 | Description 描述
 
 ## Charsets 字符集
 
-Don't do this:
+不要这样做：
 
 ``` java
 try {
   bytes = string.getBytes("UTF-8");
 } catch (UnsupportedEncodingException e) {
-  // how can this possibly happen?
+  // 猜猜看这可能会发生什么?
   throw new AssertionError(e);
 }
 ```
 
-Do this instead:
+你可以这样做
 
 ``` java
 bytes = string.getBytes(Charsets.UTF_8);
@@ -208,8 +208,7 @@ Use them instead of referring to charsets by their names.
 
 TODO: an explanation of charsets and when to use them
 
-(Note: If you're using JDK7, you should use the constants in
-[`StandardCharsets`]
+(注：如果你使用的 Java 版本是 JDK7，你可以使用 [`StandardCharsets`] 中定义的常量)
 
 ## CaseFormat
 
