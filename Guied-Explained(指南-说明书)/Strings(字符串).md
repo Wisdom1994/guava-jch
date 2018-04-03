@@ -176,14 +176,14 @@ Method 方法                                 | Description 描述
 :------------------------------------------ | :----------
 [`collapseFrom(CharSequence, char)`]        | 把每组连续不断的匹配字符替换为特定字符, 比如 `WHITESPACE.collapseFrom(string, ' ')` 把连续的空白字符替换成一个单个空格字符.
 [`matchesAllOf(CharSequence)`]              | 测试这个字符序列中是不是所有字符都匹配. 比如 `ASCII.matchesAllOf(string)`就是测试 string 中是不是所有的字符都是 ASCII 码。.
-[`removeFrom(CharSequence)`]                | Removes matching characters from the sequence.
-[`retainFrom(CharSequence)`]                | Removes all non-matching characters from the sequence.
-[`trimFrom(CharSequence)`]                  | Removes leading and trailing matching characters.
-[`replaceFrom(CharSequence, CharSequence)`] | Replace matching characters with a given sequence.
+[`removeFrom(CharSequence)`]                | 移除序列中的匹配字符.
+[`retainFrom(CharSequence)`]                | 保留序列中的匹配字符
+[`trimFrom(CharSequence)`]                  | 移除掉开头和结尾的匹配字符.
+[`replaceFrom(CharSequence, CharSequence)`] |用特定的字符序列代替匹配字符
 
 (注： 除了`matchesAllOf` 之外，所有方法的返回值都是`String`，因为 `matchesAllOf` 返回的是一个布尔类型的值)
 
-## Charsets
+## Charsets 字符集
 
 Don't do this:
 
