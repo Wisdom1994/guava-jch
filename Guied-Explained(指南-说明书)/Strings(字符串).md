@@ -169,21 +169,19 @@ Method 方法             | Description 描述
 
 ### Using CharMatchers 使用字符串匹配器
 
-`CharMatcher` provides a [wide variety] of methods to operate on occurrences of
-the specified characters in any `CharSequence`. There are more methods provided
-than we can list here, but some of the most commonly used are:
+`CharMatcher` 为处理任意 **字符序列** 中的特定字符提供了 [wide variety] 多种多样的方法,
+虽然在这里我们可以列出很多, 但是我们还是选出其中最常用的几个：
 
 Method 方法                                 | Description 描述
 :------------------------------------------ | :----------
-[`collapseFrom(CharSequence, char)`]        | Replace each group of consecutive matched characters with the specified character. For example, `WHITESPACE.collapseFrom(string, ' ')` collapses whitespaces down to a single space.
-[`matchesAllOf(CharSequence)`]              | Test if this matcher matches all characters in the sequence. For example, `ASCII.matchesAllOf(string)` tests if all characters in the string are ASCII.
+[`collapseFrom(CharSequence, char)`]        | 把每组连续不断的匹配字符替换为特定字符, 比如 `WHITESPACE.collapseFrom(string, ' ')` 把连续的空白字符替换成一个单个空格字符.
+[`matchesAllOf(CharSequence)`]              | 测试这个字符序列中是不是所有字符都匹配. 比如 `ASCII.matchesAllOf(string)`就是测试 string 中是不是所有的字符都是 ASCII 码。.
 [`removeFrom(CharSequence)`]                | Removes matching characters from the sequence.
 [`retainFrom(CharSequence)`]                | Removes all non-matching characters from the sequence.
 [`trimFrom(CharSequence)`]                  | Removes leading and trailing matching characters.
 [`replaceFrom(CharSequence, CharSequence)`] | Replace matching characters with a given sequence.
 
-(Note: all of these methods return a `String`, except for `matchesAllOf`, which
-returns a `boolean`.)
+(注： 除了`matchesAllOf` 之外，所有方法的返回值都是`String`，因为 `matchesAllOf` 返回的是一个布尔类型的值)
 
 ## Charsets
 
