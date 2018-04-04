@@ -208,13 +208,13 @@ bytes = string.getBytes(Charsets.UTF_8);
 
 (注：如果你使用的 Java 版本是 JDK7，你可以使用 [`StandardCharsets`] 中定义的常量)
 
-## CaseFormat
+## CaseFormat 大小写格式化
 
 `CaseFormat` is a handy little class for converting between ASCII case
 conventions &mdash; like, for example, naming conventions for programming
 languages. Supported formats include:
 
-Format               | Example
+Format 格式化名称      | Example 举例
 :------------------- | :-----------------
 [`LOWER_CAMEL`]      | `lowerCamel`
 [`LOWER_HYPHEN`]     | `lower-hyphen`
