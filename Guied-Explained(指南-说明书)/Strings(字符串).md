@@ -201,12 +201,10 @@ try {
 ``` java
 bytes = string.getBytes(Charsets.UTF_8);
 ```
+[`Charsets`] 为所有的 Java 平台都提供了实现支持六种字符集的常量引用,
+直接使用这些常量而不是使用名称来获取字符集示例。
 
-[`Charsets`] provides constant references to the six standard `Charset`
-implementations guaranteed to be supported by all Java platform implementations.
-Use them instead of referring to charsets by their names.
-
-TODO: an explanation of charsets and when to use them
+注：使用这些字符集的时候都会显示一些解释信息。
 
 (注：如果你使用的 Java 版本是 JDK7，你可以使用 [`StandardCharsets`] 中定义的常量)
 
