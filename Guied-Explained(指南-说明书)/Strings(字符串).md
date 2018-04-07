@@ -210,9 +210,7 @@ bytes = string.getBytes(Charsets.UTF_8);
 
 ## CaseFormat 大小写格式化
 
-`CaseFormat` is a handy little class for converting between ASCII case
-conventions &mdash; like, for example, naming conventions for programming
-languages. Supported formats include:
+`CaseFormat` 是一个非常简单的类，可以在任意的 ASCII 大小写规范之间转换字符串—— 比如，编程语言的命名规范，它有如下的方法支持:
 
 Format 格式化名称      | Example 举例
 :------------------- | :-----------------
@@ -222,14 +220,13 @@ Format 格式化名称      | Example 举例
 [`UPPER_CAMEL`]      | `UpperCamel`
 [`UPPER_UNDERSCORE`] | `UPPER_UNDERSCORE`
 
-Using it is relatively straightforward:
+CaseFormat 的使用非常直接:
 
 ``` java
-CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "CONSTANT_NAME")); // returns "constantName"
+CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "CONSTANT_NAME")); // 返回一个 "constantName"
 ```
 
-We find this especially useful, for example, when writing programs that generate
-other programs.
+我们发现它特别的有用，比如，我们用它来写一个代码生成软件的时候。
 
 [`Joiner`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/base/Joiner.html
 [`Splitter`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/base/Splitter.html
