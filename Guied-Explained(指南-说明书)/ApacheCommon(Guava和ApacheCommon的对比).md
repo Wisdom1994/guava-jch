@@ -1,8 +1,8 @@
 # Apache Commons Collections Equivalents
 # Guava Commons 与 Apache Commons
 
-Apache 基金会的 Commons 用在了成千上万的 Java 项目中,  无论是 SE 项目，Web 项目还是物联网项目,甚至在各大框架中也都有
-Apache Commons 包的身影，仅仅拿工具类库或者说是基础类库来说，Apache Commons 已经可以算作 Open Sourse 的神话.
+*脑残译者注：Apache 基金会的 Commons 用在了成千上万的 Java 项目中,  无论是 SE 项目，Web 项目还是物联网项目,甚至在各大框架中也都有
+Apache Commons 包的身影，仅仅拿工具类库或者是基础类库来说，Apache Commons 已经可以算作 Open Sourse 的神话.*
 
 # [CollectionUtils]([source])
 
