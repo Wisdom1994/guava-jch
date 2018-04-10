@@ -31,21 +31,21 @@ Apache Commons 包的身影，仅仅拿工具类库或者是基础类库来说�
 `Collection intersection(Collection, Collection)`           | `Sets/Multisets.intersection(a, b)`
 `boolean isEmpty(Collection)`                               | `collection == null`
 `boolean isEqualCollection(Collection, Collection)`         | 如果集合都是 `Set` 或者 `Multiset`, 请使用 `equals()`; 要不然就用 `ImmutableMultiset.copyOf(a).equals(ImmutableMultiset.copyOf(b)`
-`boolean isFull(Collection)`                                | No equivalent--no `BoundedCollection` type.
+`boolean isFull(Collection)`                                | 没有等价方法--不是 `BoundedCollection` 类型.
 `boolean isNotEmpty(Collection)`                            | `collection != null && !collection.isEmpty()`
-`boolean isProperSubCollection(Collection, Collection)`     | No equivalent--check that `a.size() < b.size()` and then use the check described below.
+`boolean isProperSubCollection(Collection, Collection)`     | 没有等价方法-- 检查`a.size() < b.size()` 然后使用下面的描述进行检查.
 `boolean isSubCollection(Collection, Collection)`           | `Multisets.containsOccurrences(ImmutableMultiset.copyOf(coll1), ImmutableMultiset.copyOf(coll2))`
-`int maxSize(Collection)`                                   | No equivalent--no `BoundedCollection` type.
-`Collection predicatedCollection(Collection, Predicate)`    | `Constraints.constrainedCollection/List/Set`/etc.
+`int maxSize(Collection)`                                   | 没有等价方法--不是 `BoundedCollection` 类型.
+`Collection predicatedCollection(Collection, Predicate)`    | `Constraints.constrainedCollection/List/Set`/等等.
 `Collection removeAll(Collection, Collection)`              | `newArrayList(Iterables.filter(collection, Predicates.not(Predicates.in(remove))))`
 `Collection retainAll(Collection, Collection)`              | `newArrayList(Iterables.filter(collection, Predicates.in(retain)))`
-`void reverseArray(Object[])`                               | `Lists.reverse(Arrays.asList(array))` (returns an inverse `List` view without modifying array)
+`void reverseArray(Object[])`                               | `Lists.reverse(Arrays.asList(array))` (返回一个倒序的 `List` 视图，而不是修改这个数组)
 `Collection select(Collection, Predicate)`                  | `newArrayList(Iterables.filter(collection, predicate))`
 `void select(Collection, Predicate, Collection)`            | `Iterables.addAll(output, Iterables.filter(input, predicate))`
 `Collection selectRejected(Collection, Predicate)`          | `newArrayList(Iterables.filter(collection, Predicates.not(predicate)))`
 `void selectRejected(Collection, Predicate, Collection)`    | `Iterables.addAll(output, Iterables.filter(input, Predicates.not(predicate)))`
-`int size(Object)`                                          | `Collection/Map.size()`, `array.length`, `Iterables/Iterators.size` (with `forEnumeration()` if necessary)
-`boolean sizeIsEmpty(Object)`                               | `Collection/Map.isEmpty()`, `array.length == 0`, `Iterables/Iterators.isEmpty` (with `forEnumeration()` if necessary)
+`int size(Object)`                                          | `Collection/Map.size()`, `array.length`, `Iterables/Iterators.size` (如果有必要的话，使用 `forEnumeration()` )
+`boolean sizeIsEmpty(Object)`                               | `Collection/Map.isEmpty()`, `array.length == 0`, `Iterables/Iterators.isEmpty` (如果有必要的话，使用 `forEnumeration()`)
 `Collection subtract(Collection, Collection)`               | 没有等价方法--创建一个包含 `a` 的 `ArrayList` 然后调用 `remove` 方法将其中的 `a` 换成 `b`.
 `Collection synchronizedCollection(Collection)`             | `Collections.synchronizedCollection(collection)` (JDK)
 `void transform(Collection, Transformer)`                   | 没有等价的方法—— 转换 `Collection` 成一个 `Transformer` 并不是十分有用,最好的方式是转换成视图(`Lists/Collections2.transform`)或者是复制一份.
