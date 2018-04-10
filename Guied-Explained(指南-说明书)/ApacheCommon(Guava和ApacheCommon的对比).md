@@ -21,16 +21,16 @@ Apache Commons 包的身影，仅仅拿工具类库或者是基础类库来说�
 `int countMatches(Collection, Predicate)`                   | `Iterables.size(Iterables.filter(collection, predicate))`
 `Collection disjunction(Collection, Collection)`            | `Sets.symmetricDifference(set1, set2)`
 `boolean exists(Collection, Predicate)`                     | `Iterables.any(collection, predicate)`
-`void filter(Collection, Predicate)`                        | `Iterables.removeIf(collection, not(predicate))` (see also `Iterables.transform`, which creates a view instead of mutating the input)
+`void filter(Collection, Predicate)`                        | `Iterables.removeIf(collection, not(predicate))` (参见 `Iterables.transform`,创建了视图而不是改变了输入)
 `Object find(Collection, Predicate)`                        | `Iterables.find(collection, predicate)`
 `void forAllDo(Collection, Closure)`                        | `for (Object o : collection) { closure.execute(o); }`
-`Object get(Object, int)`                                   | `Iterables.get(o, index)`, supplemented with calls to `entrySet()`, `forEnumeration()`, etc.
+`Object get(Object, int)`                                   | `Iterables.get(o, index)`, 或者调用 `entrySet()`, `forEnumeration()`, 等等.
 `Map getCardinalityMap(Collection)`                         | `ImmutableMultiset.copyOf(collection)`
-`Object index(Object, int)`                                 | `Iterables.get(o, index)`, supplemented with calls to `keySet()`, `forEnumeration()`, etc.
-`Object index(Object, Object)`                              | `Iterables.get(o, index)`, supplemented with calls to `entrySet()`, `forEnumeration()`, etc.
+`Object index(Object, int)`                                 | `Iterables.get(o, index)`, 或者调用 `keySet()`, `forEnumeration()`, 等等.
+`Object index(Object, Object)`                              | `Iterables.get(o, index)`, s或者调用 `entrySet()`, `forEnumeration()`, 等等.
 `Collection intersection(Collection, Collection)`           | `Sets/Multisets.intersection(a, b)`
 `boolean isEmpty(Collection)`                               | `collection == null`
-`boolean isEqualCollection(Collection, Collection)`         | If both are `Set`s or `Multiset`s, use `equals()`; otherwise `ImmutableMultiset.copyOf(a).equals(ImmutableMultiset.copyOf(b)`
+`boolean isEqualCollection(Collection, Collection)`         | 如果集合都是 `Set` 或者 `Multiset`, 请使用 `equals()`; 要不然就用 `ImmutableMultiset.copyOf(a).equals(ImmutableMultiset.copyOf(b)`
 `boolean isFull(Collection)`                                | No equivalent--no `BoundedCollection` type.
 `boolean isNotEmpty(Collection)`                            | `collection != null && !collection.isEmpty()`
 `boolean isProperSubCollection(Collection, Collection)`     | No equivalent--check that `a.size() < b.size()` and then use the check described below.
@@ -46,13 +46,13 @@ Apache Commons 包的身影，仅仅拿工具类库或者是基础类库来说�
 `void selectRejected(Collection, Predicate, Collection)`    | `Iterables.addAll(output, Iterables.filter(input, Predicates.not(predicate)))`
 `int size(Object)`                                          | `Collection/Map.size()`, `array.length`, `Iterables/Iterators.size` (with `forEnumeration()` if necessary)
 `boolean sizeIsEmpty(Object)`                               | `Collection/Map.isEmpty()`, `array.length == 0`, `Iterables/Iterators.isEmpty` (with `forEnumeration()` if necessary)
-`Collection subtract(Collection, Collection)`               | No equivalent--create an `ArrayList` containing `a` and then call `remove` on it for each element in `b`.
+`Collection subtract(Collection, Collection)`               | 没有等价方法--创建一个包含 `a` 的 `ArrayList` 然后调用 `remove` 方法将其中的 `a` 换成 `b`.
 `Collection synchronizedCollection(Collection)`             | `Collections.synchronizedCollection(collection)` (JDK)
-`void transform(Collection, Transformer)`                   | No equivalent for transforming a `Collection` in place... not very useful. Prefer transformed views (`Lists/Collections2.transform`) or copies of them.
-`Collection transformedCollection(Collection, Transformer)` | No equivalent for transforming `Object`s that are added to a `Collection`... a `ForwardingCollection` could easily handle this, though.
-`Collection typedCollection(Collection, Class)`             | `Collections.checkedCollection/Set/List`/etc. (JDK)
+`void transform(Collection, Transformer)`                   | 没有等价的方法—— 转换 `Collection` 成一个 `Transformer` 并不是十分有用,最好的方式是转换成视图(`Lists/Collections2.transform`)或者是复制一份.
+`Collection transformedCollection(Collection, Transformer)` | 没有等价的方法—— 转换添加到 `Collection` 中的 `Object` 对象。不过使用`ForwardingCollection` 可以轻松搞定.
+`Collection typedCollection(Collection, Class)`             | `Collections.checkedCollection/Set/List`/等等. (JDK)
 `Collection union(Collection, Collection)`                  | `Sets.union(a, b)`
-`Collection unmodifiableCollection(Collection)`             | `Collections.unmodifiableCollection/Set/List`/etc. (JDK) Consider `ImmutableCollection` types if you want immutability.
+`Collection unmodifiableCollection(Collection)`             | `Collections.unmodifiableCollection/Set/List`/等等. (JDK) 如果想要不可变的话，考虑 `ImmutableCollection` 类型的集合.
 
 [CollectionUtils]: http://commons.apache.org/collections/apidocs/org/apache/commons/collections/CollectionUtils.html
 [source]: http://svn.apache.org/viewvc/commons/proper/collections/trunk/src/java/org/apache/commons/collections/CollectionUtils.java?view=markup
