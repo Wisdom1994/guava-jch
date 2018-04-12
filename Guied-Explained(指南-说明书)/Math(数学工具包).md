@@ -17,7 +17,7 @@
     values of the form `y = mx + b`; for example, a conversion between feet and
     meters, or between Kelvins and degrees Fahrenheit.
 
-## Examples
+## Examples 举个栗子
 
 ``` java
 int logFloor = LongMath.log2(n, FLOOR);
@@ -31,7 +31,7 @@ BigInteger nearestInteger = DoubleMath.roundToBigInteger(d, RoundingMode.HALF_EV
 BigInteger sideLength = BigIntegerMath.sqrt(area, CEILING);
 ```
 
-## Why use these?
+## Why use these? 为什么使用这些工具类?
 
 *   These utilities are already exhaustively tested for unusual overflow
     conditions. Overflow semantics, if relevant, are clearly specified in the
@@ -48,13 +48,13 @@ BigInteger sideLength = BigIntegerMath.sqrt(area, CEILING);
 _Note: these utilities are not especially compatible with GWT, nor are
 they optimized for GWT, due to differing overflow logic._
 
-## Math on Integral Types
+## Math on Integral Types 整形计算
 
 These utilities deal primarily with three integral types: `int`, `long`,
 and `BigInteger`. The math utilities on these types are conveniently named
 [`IntMath`], [`LongMath`], and [`BigIntegerMath`].
 
-### Checked Arithmetic
+### Checked Arithmetic 检查方法
 
 We provide arithmetic methods for `IntMath` and `LongMath` that fail fast on
 overflow instead of silently ignoring it.
@@ -70,7 +70,7 @@ overflow instead of silently ignoring it.
 IntMath.checkedAdd(Integer.MAX_VALUE, Integer.MAX_VALUE); // throws ArithmeticException
 ```
 
-## Real-valued methods
+## Real-valued methods 真值方法
 
 `IntMath`, `LongMath`, and `BigIntegerMath` have support for a variety of
 methods with a "precise real value," but that round their result to an integer.
@@ -106,7 +106,7 @@ BigIntegerMath.sqrt(BigInteger.TEN.pow(99), RoundingMode.HALF_EVEN);
    // returns 31622776601683793319988935444327185337195551393252
 ```
 
-### Additional functions
+### Additional functions 其他方法
 
 We provide support for a few other mathematical functions we've found useful.
 
@@ -119,7 +119,7 @@ Power-of-two testing                                  | [`isPowerOfTwo(int)`]   
 Factorial (returns `MAX_VALUE` if input too big)      | [`factorial(int)`][`IntMath.factorial(int)`]         | [`factorial(int)`][`LongMath.factorial(int)`]         | [`factorial(int)`][`BigIntegerMath.factorial(int)`]
 Binomial coefficient (returns `MAX_VALUE` if too big) | [`binomial(int, int)`][`IntMath.binomial(int, int)`] | [`binomial(int, int)`][`LongMath.binomial(int, int)`] | [`binomial(int, int)`][`BigIntegerMath.binomial(int, int)`]
 
-## Floating-point arithmetic
+## Floating-point arithmetic 浮点数方法
 
 Floating point arithmetic is pretty thoroughly covered by the JDK, but we added
 a few useful methods to [`DoubleMath`].
