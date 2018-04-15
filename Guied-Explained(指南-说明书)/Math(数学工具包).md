@@ -1,18 +1,15 @@
 # Math -- Guava的数学工具包
 
-这个包中包含了各种各样的数学工具类
+这个包中含有各种各样的数学工具类
 
-## Contents
+## Contents 综述
 
-*   Basic standalone math functions are divided into the classes [`IntMath`],
-    [`LongMath`], [`DoubleMath`], and [`BigIntegerMath`] based on the primary
-    numeric type involved. These classes have parallel structure, but each
-    supports only the relevant subset of functions. Note that similar functions
-    that are less *mathematical* in nature might instead be found in
-    `com.google.common.primitives` classes like [`Ints`].
-*   A variety of statistical calculations (mean, median, etc.) are provided, for
-    both single and paired data sets. Start by reading this [overview][Stats]
-    rather than just browsing Javadoc.
+*   Guava Math 提供了为基本数据类型而设计的独立的类[`IntMath`],[`LongMath`], 
+    [`DoubleMath`], 和 [`BigIntegerMath`], 这些类具有这相互平行的结构,
+    他们的方法都是基于相应数据类型而进行实现.
+    **注: 在`com.google.common.primitives`包中, 有一些函数或者类可能看起来不那么的 *数学*, 比如 [`Ints`].**
+*   Guava 为单个或者成对的数据集提供了各种统计计算的方法(比如求平均值，中位数等等).
+    如果想使用 Guava Math 包，请先阅读这个指南[Stats] 而不是去阅读 Java DOC.
 *   [`LinearTransformation`] represents a linear conversion between `double`
     values of the form `y = mx + b`; for example, a conversion between feet and
     meters, or between Kelvins and degrees Fahrenheit.
