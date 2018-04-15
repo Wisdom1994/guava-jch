@@ -7,7 +7,7 @@
 *   Guava Math 提供了为基本数据类型而设计的独立的类[`IntMath`],[`LongMath`], 
     [`DoubleMath`], 和 [`BigIntegerMath`], 这些类具有这相互平行的结构,
     他们的方法都是基于相应数据类型而进行实现.
-    **注: 在`com.google.common.primitives`包中, 有一些函数或者类可能看起来不那么的 *数学*, 比如 [`Ints`].**
+    **请注意: 在`com.google.common.primitives`包中, 有一些函数或者类可能看起来不那么的 *数学*, 比如 [`Ints`].**
 *   Guava 为单个或者成对的数据集提供了各种统计计算的方法(比如求平均值，中位数等等).
     如果想使用 Guava Math 包，请先阅读这个指南[Stats] 而不是去阅读 Java DOC.
 *   [`LinearTransformation`] represents a linear conversion between `double`
