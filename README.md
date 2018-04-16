@@ -87,6 +87,7 @@ Guava 的最新的快照是通过 Maven 构建的、基于 `master` 分支的 `H
 * [Hashing 哈希](https://github.com/Wisdom1994/guava-jch/blob/master/Guied-Explained(%E6%8C%87%E5%8D%97-%E8%AF%B4%E6%98%8E%E4%B9%A6)/Hashing(%E5%93%88%E5%B8%8C).md)
 * [Caches 缓存](https://github.com/Wisdom1994/guava-jch/blob/master/Guied-Explained(%E6%8C%87%E5%8D%97-%E8%AF%B4%E6%98%8E%E4%B9%A6)/Caches(%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF).md)
 * [Strings 字符串工具](https://github.com/Wisdom1994/guava-jch/blob/master/Guied-Explained(%E6%8C%87%E5%8D%97-%E8%AF%B4%E6%98%8E%E4%B9%A6)/Strings(%E5%AD%97%E7%AC%A6%E4%B8%B2).md)
+* [Math 工具包](https://github.com/Wisdom1994/guava-jch/blob/master/Guied-Explained(%E6%8C%87%E5%8D%97-%E8%AF%B4%E6%98%8E%E4%B9%A6)/Math(%E6%95%B0%E5%AD%A6%E5%B7%A5%E5%85%B7%E5%8C%85).md)
 ## Guava 代码解析
 <!-- References -->
 [current release]: https://github.com/google/guava/releases/tag/v24.1
