@@ -1,6 +1,6 @@
 # Math -- Guava的数学工具包
 
-这个包中含有各种各样的数学工具类
+这个包中含有各种各样的数学工具类,比 JDK 更优化, 测试更完善
 
 ## Contents 综述
 
@@ -118,16 +118,16 @@ Binomial coefficient (returns `MAX_VALUE` if too big) | [`binomial(int, int)`][`
 
 ## Floating-point arithmetic 浮点数方法
 
-Floating point arithmetic is pretty thoroughly covered by the JDK, but we added
-a few useful methods to [`DoubleMath`].
+Guava 对于浮点数计算的实现采用的完全是 JDK 中的方法, 但是在 Guava Math 中,
+问我们为 [`DoubleMath`] 添加了一些十分有用的方法.
 
-| Method                                | Description                           |
+| Method 方法                           | Description  描述                         |
 | :------------------------------------ | :------------------------------------ |
-| [`isMathematicalInteger(double)`]     | Tests if the input is finite and an  exact integer. |
-| [`roundToInt(double, RoundingMode)`]  | Rounds the specified number and casts it to an int, if it fits into an int, failing fast otherwise. |
-| [`roundToLong(double, RoundingMode)`] | Rounds the specified number and casts it to a long, if it fits into a long, failing fast otherwise. |
-| [`roundToBigInteger(double, RoundingMode)`] | Rounds the specified number to a `BigInteger`, if it is finite, failing fast otherwise. |
-| [`log2(double, RoundingMode)`]       | Takes the base-2 logarithm, and rounds to an `int` using the specified `RoundingMode`. Faster than `Math.log(double)`. |
+| [`isMathematicalInteger(double)`]     | 判断这个数是一个有限数(非无穷)并且是一个精确的整数. |
+| [`roundToInt(double, RoundingMode)`]  | 围绕这个特殊的数, 将其转换成一个整形 int,如果溢出(超出int的范围)则抛出异常 |
+| [`roundToLong(double, RoundingMode)`] | 围绕这个特殊的数, 将其转换为一个 long, 如果溢出, 则抛出异常. |
+| [`roundToBigInteger(double, RoundingMode)`] | 将这个数转换为 `BigInteger`, 如果这个数是无限的, 则抛出异常. |
+| [`log2(double, RoundingMode)`]       | 取 2 的 log 对数, 并根据 `RoundingMode` 转换为 int; 比 JDK 中的 `Math.log(double)` 计算速度要快. |
 
 [`BigIntegerMath`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/math/BigIntegerMath.html
 [`DoubleMath`]: http://google.github.io/guava/releases/snapshot/api/docs/com/google/common/math/DoubleMath.html
