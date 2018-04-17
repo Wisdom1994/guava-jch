@@ -105,9 +105,9 @@ BigIntegerMath.sqrt(BigInteger.TEN.pow(99), RoundingMode.HALF_EVEN);
 
 ### Additional functions 其他方法
 
-We provide support for a few other mathematical functions we've found useful.
+我们提供了一些额外的我们所发现的十分有用的一些数学方法(函数/工具/公式).
 
-Operation                                             | `IntMath`                                            | `LongMath`                                            | `BigIntegerMath`
+Operation 运算                                             | `IntMath` 整形计算                               | `LongMath` 长整型计算                                   | `BigIntegerMath` 超大整形数据计算
 :---------------------------------------------------- | :--------------------------------------------------- | :---------------------------------------------------- | :---------------
 Greatest common divisor                               | [`gcd(int, int)`]                                    | [`gcd(long, long)`]                                   | In JDK: [`BigInteger.gcd(BigInteger)`]
 Modulus (always nonnegative, -5 mod 3 is 1)           | [`mod(int, int)`]                                    | [`mod(long, long)`]                                   | In JDK: [`BigInteger.mod(BigInteger)`]
@@ -119,7 +119,7 @@ Binomial coefficient (returns `MAX_VALUE` if too big) | [`binomial(int, int)`][`
 ## Floating-point arithmetic 浮点数方法
 
 Guava 对于浮点数计算的实现采用的完全是 JDK 中的方法, 但是在 Guava Math 中,
-问我们为 [`DoubleMath`] 添加了一些十分有用的方法.
+我们为 [`DoubleMath`] 添加了一些十分有用的方法.
 
 | Method 方法                           | Description  描述                         |
 | :------------------------------------ | :------------------------------------ |
