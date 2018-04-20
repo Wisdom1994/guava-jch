@@ -32,12 +32,11 @@ BigInteger sideLength = BigIntegerMath.sqrt(area, CEILING);
 
 *   Guava Math的工具类为很多不常见的溢出情况都做了充分的测试. 溢出的语义也在相关的文档中进行了清晰的定义.
     如果预检查不能通过, 则快速的返回失败(异常).
-*   They have been benchmarked and optimized.
-    While performance inevitably varies depending on particular hardware
-    details, their speed is competitive with -- and in some cases, significantly
-    better than -- analogous functions in Apache Commons `MathUtils`.
+*   Guava Math 已经进行了基准测试和最佳的优化, 尽管因为不同的硬件原因会造成不可避免的性能差异,
+    但是 Guava Math 通常情况下的运行速度与 `Apache Commons` 的 `MathUtils` 互相媲美,
+    在某些场景下, Guava Math 甚至更优.
 *   They are designed to encourage readable, correct
-    programming habits. The meaning of `IntMath.log2(x, CEILING)` is unambiguous
+    programming habits. The meaning of `IntMath.log2(x, CEILING)` is unuous
     and obvious even on a casual read-through. The meaning of `32 -
     Integer.numberOfLeadingZeros(x - 1)` is not.
 
