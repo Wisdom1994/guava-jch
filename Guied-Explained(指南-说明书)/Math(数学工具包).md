@@ -30,9 +30,8 @@ BigInteger sideLength = BigIntegerMath.sqrt(area, CEILING);
 
 ## Why use these? 为什么使用这些工具类?
 
-*   These utilities are already exhaustively tested for unusual overflow
-    conditions. Overflow semantics, if relevant, are clearly specified in the
-    associated documentation. When a precondition fails, it fails fast.
+*   Guava Math的工具类为很多不常见的溢出情况都做了充分的测试. 溢出的语义也在相关的文档中进行了清晰的定义.
+    如果预检查不能通过, 则快速的返回失败(异常).
 *   They have been benchmarked and optimized.
     While performance inevitably varies depending on particular hardware
     details, their speed is competitive with -- and in some cases, significantly
