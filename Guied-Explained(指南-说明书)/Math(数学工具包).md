@@ -35,13 +35,12 @@ BigInteger sideLength = BigIntegerMath.sqrt(area, CEILING);
 *   Guava Math 已经进行了基准测试和最佳的优化, 尽管因为不同的硬件原因会造成不可避免的性能差异,
     但是 Guava Math 通常情况下的运行速度与 `Apache Commons` 的 `MathUtils` 互相媲美,
     在某些场景下, Guava Math 甚至更优.
-*   They are designed to encourage readable, correct
-    programming habits. The meaning of `IntMath.log2(x, CEILING)` is unuous
-    and obvious even on a casual read-through. The meaning of `32 -
-    Integer.numberOfLeadingZeros(x - 1)` is not.
+*   这些类在设计之初就考虑到了代码的可读性、帮助养成好的编码习惯。
+    比如 `IntMath.log2(x, CEILING)` 在你进行快速浏览代码的时候也能清晰快速的了解它的含义，
+    而`32 - Integer.numberOfLeadingZeros(x - 1)` 在你不查看API的情况下就很难理解
+    (**而它，实际上表示x-1转换为32位二进制补码之后，最高有值位前0的个数**)。
 
-_Note: these utilities are not especially compatible with GWT, nor are
-they optimized for GWT, due to differing overflow logic._
+_注意: 这些类与 GWT 不兼容的，他们也不都是 GWT 的优化， 原因是他们有不同的计算溢出逻辑。_
 
 ## Math on Integral Types 整形计算
 
