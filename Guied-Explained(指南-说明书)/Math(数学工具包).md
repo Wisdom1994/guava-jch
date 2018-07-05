@@ -44,14 +44,15 @@ _注意: 这些类与 GWT 不兼容的，他们也不都是 GWT 的优化， 原
 
 ## Math on Integral Types 整形计算
 
-These utilities deal primarily with three integral types: `int`, `long`,
-and `BigInteger`. The math utilities on these types are conveniently named
-[`IntMath`], [`LongMath`], and [`BigIntegerMath`].
+Math工具包主要处理三种整数类型值的计算： `int`, `long`, 和 `BigInteger`。 
+其中的工具类被合理的命名为[`IntMath`], [`LongMath`], 和 [`BigIntegerMath`].
 
 ### Checked Arithmetic 检查方法
 
 We provide arithmetic methods for `IntMath` and `LongMath` that fail fast on
 overflow instead of silently ignoring it.
+Guava Math 为 `IntMath` 和 `LongMath` 计算中可能的一些结果溢出情况提供了一些运算方法, 
+这些方法将导致有结果溢出的计算**快速失败**而不是忽略掉溢出。
 
 `IntMath`                   | `LongMath`
 :-------------------------- | :---------------------------
@@ -61,7 +62,7 @@ overflow instead of silently ignoring it.
 [`IntMath.checkedPow`]      | [`LongMath.checkedPow`]
 
 ``` java
-IntMath.checkedAdd(Integer.MAX_VALUE, Integer.MAX_VALUE); // throws ArithmeticException
+IntMath.checkedAdd(Integer.MAX_VALUE, Integer.MAX_VALUE); // 抛出 ArithmeticException 异常.
 ```
 
 ## Real-valued methods 真值方法
