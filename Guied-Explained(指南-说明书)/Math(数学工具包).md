@@ -49,10 +49,8 @@ Math工具包主要处理三种整数类型值的计算： `int`, `long`, 和 `B
 
 ### Checked Arithmetic 检查方法
 
-We provide arithmetic methods for `IntMath` and `LongMath` that fail fast on
-overflow instead of silently ignoring it.
 Guava Math 为 `IntMath` 和 `LongMath` 计算中可能的一些结果溢出情况提供了一些运算方法, 
-这些方法将导致有结果溢出的计算**快速失败**而不是忽略掉溢出。
+这些方法将导致有结果溢出的计算 **快速失败** 而不是忽略掉溢出。
 
 `IntMath`                   | `LongMath`
 :-------------------------- | :---------------------------
@@ -62,18 +60,18 @@ Guava Math 为 `IntMath` 和 `LongMath` 计算中可能的一些结果溢出情�
 [`IntMath.checkedPow`]      | [`LongMath.checkedPow`]
 
 ``` java
+// 举个栗子
 IntMath.checkedAdd(Integer.MAX_VALUE, Integer.MAX_VALUE); // 抛出 ArithmeticException 异常.
 ```
 
-## Real-valued methods 真值方法
+## Real-valued methods 实数运算
 
-`IntMath`, `LongMath`, and `BigIntegerMath` have support for a variety of
-methods with a "precise real value," but that round their result to an integer.
-These methods accept a [`java.math.RoundingMode`]. This is the same
-`RoundingMode` used in the JDK, and is an enum with the following values:
+`IntMath`, `LongMath` 和 `BigIntegerMath` 提供了很多实数运算的方法, 但是他们都会将结果取整.
+这些方法接受一个 [`java.math.RoundingMode`] 枚举值用作取整的类型, 这枚举值和 JDK 中的 `RoundingMode` 相同,
+并且遵循着以下规则：
 
-*   `DOWN`: round towards 0. (This is the behavior of Java division.)
-*   `UP`: round away from 0.
+*   `DOWN`: 向下取整. (与Java除法的行为相同， 比如 Java 中计算 5 / 2 = 2.)
+*   `UP`: 向上取整(即 5 / 2 = 3).
 *   `FLOOR`: round towards negative infinity.
 *   `CEILING`: round towards positive infinity.
 *   `UNNECESSARY`: rounding should not be necessary; if it is, fail fast by
