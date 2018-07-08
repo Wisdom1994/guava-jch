@@ -78,7 +78,8 @@ IntMath.checkedAdd(Integer.MAX_VALUE, Integer.MAX_VALUE); // 抛出 ArithmeticEx
 *   `HALF_UP`: 四舍五入，0.5的话向前进1( 5 / 2 = 3).
 *   `HALF_DOWN`: 特殊的四舍五入，大于0.5进1，等于小于0.5为0(5 / 2 = 2).
 *   `HALF_EVEN`: 特殊的四舍五入，0.5会进位到最相邻的偶数，大于0.5则进位。
-(_注：HALF_EVEN：我们用 12 与 13 除以 5 举例， 12 / 5 = 2.5 那么 HALF_EVEN 返回的就是 2， 13 / 5 = 2.6 那么 HALF_EVEN 返回 3._)。
+(_注：HALF_EVEN：我们用 12 与 13 除以 5 举例， 12 / 5 = 2.5 那么 HALF_EVEN 返回的就是 2， 13 / 5 = 2.6 那么 HALF_EVEN 返回 3.
+特殊的： 21 / 6 = 3.5 进位到最相邻的偶数，那么返回_)。
 
 These methods are meant to be readable when used: for example, `divide(x, 3,
 CEILING)` is completely unambiguous even on a casual read-through.
