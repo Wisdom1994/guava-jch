@@ -72,14 +72,13 @@ IntMath.checkedAdd(Integer.MAX_VALUE, Integer.MAX_VALUE); // 抛出 ArithmeticEx
 
 *   `DOWN`: 向下取整. (与Java除法的行为相同， 比如 Java 中计算 5 / 2 = 2.)
 *   `UP`: 向上取整(即 5 / 2 = 3).
-*   `FLOOR`: round towards negative infinity.
-*   `CEILING`: round towards positive infinity.
-*   `UNNECESSARY`: rounding should not be necessary; if it is, fail fast by
-    throwing an `ArithmeticException`.
-*   `HALF_UP`: round to the nearest half, rounding `x.5` away from 0.
-*   `HALF_DOWN`: round to the nearest half, rounding `x.5` towards 0.
-*   `HALF_EVEN`: round to the nearest half, rounding `x.5` to its nearest even
-    neighbor.
+*   `FLOOR`: 向着0的负无穷的方向取整(实际检验中，此枚举类结果为 5 / 2 = 2，与 **DOWN** 相同，具体区别有待验证).
+*   `CEILING`: 向着0的正无穷方向取整(实际检验中，此枚举类结果为 5 / 2 = 3，与 **UP** 相同，具体区别有待验证).
+*   `UNNECESSARY`: 无需取整，若如此做，将会抛出一个 `ArithmeticException` 异常并快速失败.
+*   `HALF_UP`: 四舍五入，0.5的话向前进1( 5 / 2 = 3).
+*   `HALF_DOWN`: 特殊的四舍五入，大于0.5进1，等于小于0.5为0(5 / 2 = 2).
+*   `HALF_EVEN`: 特殊的四舍五入，0.5会进位到最相邻的偶数，大于0.5则进位。
+(_注：HALF_EVEN：我们用 12 与 13 除以 5 举例， 12 / 5 = 2.5 那么 HALF_EVEN 返回的就是 2， 13 / 5 = 2.6 那么 HALF_EVEN 返回 3._)。
 
 These methods are meant to be readable when used: for example, `divide(x, 3,
 CEILING)` is completely unambiguous even on a casual read-through.
