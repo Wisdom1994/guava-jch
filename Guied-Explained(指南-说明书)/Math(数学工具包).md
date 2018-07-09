@@ -42,9 +42,9 @@ BigInteger sideLength = BigIntegerMath.sqrt(area, CEILING);
 
 _注意: 这些类与 GWT 不兼容的，他们也不都是 GWT 的优化， 原因是他们有不同的计算溢出逻辑。_
 
-## Math on Integral Types 整形计算
+## Math on Integral Types 整型数值计算
 
-Math工具包主要处理三种整数类型值的计算： `int`, `long`, 和 `BigInteger`。 
+对于整数, Math工具包主要处理三种整数类型值的计算： `int`, `long`, 和 `BigInteger`。 
 其中的工具类被合理的命名为[`IntMath`], [`LongMath`], 和 [`BigIntegerMath`].
 
 ### Checked Arithmetic 检查方法
