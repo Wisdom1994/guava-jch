@@ -79,13 +79,13 @@ IntMath.checkedAdd(Integer.MAX_VALUE, Integer.MAX_VALUE); // 抛出 ArithmeticEx
 *   `HALF_DOWN`: 特殊的四舍五入，大于0.5进1，等于小于0.5为0(5 / 2 = 2).
 *   `HALF_EVEN`: 特殊的四舍五入，0.5会进位到最相邻的偶数，大于0.5则进位。
 (_注：HALF_EVEN：我们用 12 与 13 除以 5 举例， 12 / 5 = 2.5 那么 HALF_EVEN 返回的就是 2， 13 / 5 = 2.6 那么 HALF_EVEN 返回 3.
-特殊的： 21 / 6 = 3.5 进位到最相邻的偶数，那么返回_)。
+特殊的： 21 / 6 = 3.5 进位到最相邻的偶数，那么返回 4_)。
 
-These methods are meant to be readable when used: for example, `divide(x, 3,
-CEILING)` is completely unambiguous even on a casual read-through.
+这些方法在被使用时应该是具有良好可读性的, 例如:  `divide(x, 3, CEILING)` 
+的语义在快速通读浏览的情况下也是非常清晰的。
 
-Additionally, each of these functions internally use only integer arithmetic,
-except in constructing initial approximations for use in `sqrt`.
+此外, 除了 `sqrt` 之外, 这些方法的内部采用整数计算进行实现, 
+而在 `sqrt` 中, 则是先构建构建初始近似值(先进行浮点数计算).
 
 | Operation         | `IntMath`          | `LongMath`      | `BigIntegerMath`     |
 | :---------------- | :----------------- | :-------------- | :------------------- |
@@ -106,11 +106,11 @@ BigIntegerMath.sqrt(BigInteger.TEN.pow(99), RoundingMode.HALF_EVEN);
 Operation 运算                                             | `IntMath` 整形计算                               | `LongMath` 长整型计算                                   | `BigIntegerMath` 超大整形数据计算
 :---------------------------------------------------- | :--------------------------------------------------- | :---------------------------------------------------- | :---------------
 Greatest common divisor                               | [`gcd(int, int)`]                                    | [`gcd(long, long)`]                                   | In JDK: [`BigInteger.gcd(BigInteger)`]
-Modulus (always nonnegative, -5 mod 3 is 1)           | [`mod(int, int)`]                                    | [`mod(long, long)`]                                   | In JDK: [`BigInteger.mod(BigInteger)`]
+Modulus (总是正值, -5 取模 3 返回 1)           | [`mod(int, int)`]                                    | [`mod(long, long)`]                                   | In JDK: [`BigInteger.mod(BigInteger)`]
 Exponentiation (may overflow)                         | [`pow(int, int)`]                                    | [`pow(long, int)`]                                    | In JDK: [`BigInteger.pow(int)`]
 Power-of-two testing                                  | [`isPowerOfTwo(int)`]                                | [`isPowerOfTwo(long)`]                                | [`isPowerOfTwo(BigInteger)`]
-Factorial (returns `MAX_VALUE` if input too big)      | [`factorial(int)`][`IntMath.factorial(int)`]         | [`factorial(int)`][`LongMath.factorial(int)`]         | [`factorial(int)`][`BigIntegerMath.factorial(int)`]
-Binomial coefficient (returns `MAX_VALUE` if too big) | [`binomial(int, int)`][`IntMath.binomial(int, int)`] | [`binomial(int, int)`][`LongMath.binomial(int, int)`] | [`binomial(int, int)`][`BigIntegerMath.binomial(int, int)`]
+Factorial (如果输入过大, 则返回最大值 `MAX_VALUE` )      | [`factorial(int)`][`IntMath.factorial(int)`]         | [`factorial(int)`][`LongMath.factorial(int)`]         | [`factorial(int)`][`BigIntegerMath.factorial(int)`]
+Binomial coefficient (如果值过大, 则返回最大值 `MAX_VALUE` ) | [`binomial(int, int)`][`IntMath.binomial(int, int)`] | [`binomial(int, int)`][`LongMath.binomial(int, int)`] | [`binomial(int, int)`][`BigIntegerMath.binomial(int, int)`]
 
 ## Floating-point arithmetic 浮点数方法
 
