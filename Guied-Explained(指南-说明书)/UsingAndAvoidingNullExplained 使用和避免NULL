@@ -1,14 +1,12 @@
-# Using and avoiding null
+# Using and avoiding null 使用和避免 ‘NULL’
 
-> *"Null sucks."* -[Doug Lea]
+> *"Null sucks.(Null 就是狗屎)"* -[Doug Lea(译注:JCP成员,纽约州立大学计算机系教授,JCP成员,java.concurrent包作者)]
 >
-> *"I call it my billion-dollar mistake."* - [Sir C. A. R. Hoare], on his
-> invention of the null reference
+> *"I call it my billion-dollar mistake(Null引用：代价十亿美元的错误)."* - [Sir C. A. R. Hoare(译注:托尼.霍尔, 图灵奖得主)]
 
-Careless use of `null` can cause a staggering variety of bugs. Studying the
-Google code base, we found that something like 95% of collections weren't
-supposed to have any null values in them, and having those fail fast rather than
-silently accept `null` would have been helpful to developers.
+十分随意的使用 `null` 会导致很多惊人的 bug 产生. 我们在研究 Google 代码库之后发现:
+几乎 95% 的 集合类不接受一个 `null` 作为其中的值, 所以我们认为, 相比与默默的使用 `null` 
+并且容忍它对我们的伤害, 不如使用快速失败操作拒绝 `null` 对开发者们来的更有帮助.
 
 Additionally, `null` is unpleasantly ambiguous. It's rarely obvious what a
 `null` return value is supposed to mean -- for example, `Map.get(key)` can
@@ -30,7 +28,7 @@ null-friendly workaround available. Additionally, Guava provides a number of
 facilities both to make using `null` easier, when you must, and to help you
 avoid using `null`.
 
-## Specific Cases
+## Specific Cases 特殊情况
 
 If you're trying to use `null` values in a `Set` or as a key in a `Map` --
 don't; it's clearer (less surprising) if you explicitly special-case `null`
