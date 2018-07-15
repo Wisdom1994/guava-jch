@@ -8,11 +8,10 @@
 几乎 95% 的 集合类不接受一个 `null` 作为其中的值, 所以我们认为, 相比与默默的使用 `null` 
 并且容忍它对我们的伤害, 不如使用快速失败操作拒绝 `null` 对开发者们来的更有帮助.
 
-Additionally, `null` is unpleasantly ambiguous. It's rarely obvious what a
-`null` return value is supposed to mean -- for example, `Map.get(key)` can
-return `null` either because the value in the map is null, or the value is not
-in the map. Null can mean failure, can mean success, can mean almost anything.
-Using something other than `null` makes your meaning clear.
+此外, `null` 具有使人十分难受的模糊语义, 如果 `null` 作为一个返回值, 它很少具有十分清晰的含义.
+举个栗子: `Map.get(key)` 返回一个 `null` 值, 它可以表示这个 map 中是空的, 或者是 map 
+中没有 key 对应的值. `null` 可以表示失败, 可以表示成功, 甚至是表示任何情况.
+而使用除了 `null` 之外的其他值, 将会使语义更加的清晰明确.
 
 That said, there are times when `null` is the right and correct thing to use.
 `null` is cheap, in terms of memory and speed, and it's unavoidable in object
