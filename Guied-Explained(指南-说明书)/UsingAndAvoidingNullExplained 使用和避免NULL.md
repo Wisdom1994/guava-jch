@@ -18,11 +18,9 @@
 但是在基于底层库的应用级别的代码中, `null` 通常是导致含糊语义以及疑难bug的罪魁祸首,
 就像我们之前讨论过的 `Map.get` 返回 null 值的含义问题. 最关键的是, `null` 并没有定义 null 值是什么含义.
 
-For these reasons, many of Guava's utilities are designed to fail fast in the
-presence of null rather than allow nulls to be used, so long as there is a
-null-friendly workaround available. Additionally, Guava provides a number of
-facilities both to make using `null` easier, when you must, and to help you
-avoid using `null`.
+基于以上原因, Guava 的很多工具类都定义了对 `null` 值的快速失败, 同时, 
+除非工具类本身对 NULL 定义了确定的含义(值), 否则不允许 null 值被使用.
+并且, Guava 也提供了大量的方法, 在你有需要的时候, 能帮助你使用特定的值来代替结果集中的 NULL.
 
 ## Specific Cases 特殊情况
 
