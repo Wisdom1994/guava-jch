@@ -28,8 +28,8 @@
 使用一个特殊的确定的值来代替 `null` 会使语义毫无惊喜 (less surprising) 的清晰起来.
 
 如果你想使用 `null` 作为一个 Map 中的值, 不如把它们整理出来单独作为一个集合来进行维护,
-比如将你的 `Set` 分为两个, 不含 `null` 和只含 `null` 的. 在一个 Map 中, **一个确定的键对应了的值是NULL** 和
- **Map中确定的键没有与之对应的值** 是十分容易混淆的. 所以, 最好是将值为 null 的键从这个 map 中分离出来,
+比如将你的 `Set` 分为两个, 不含 `null` 和只含 `null` 的. 在一个 Map 中, **‘一个确定的键对应了的值是NULL’** 和
+ **‘Map中确定的键没有与之对应的值’** 是十分容易混淆的. 所以, 最好是将值为 null 的键从这个 map 中分离出来,
  并且需要你仔细想想：`null` 在你的应用程序中到底代表着什么含义.
 
 If you're using nulls in a `List` -- if the list is sparse, might you rather use
