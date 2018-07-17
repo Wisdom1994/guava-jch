@@ -13,13 +13,10 @@
 中没有 key 对应的值. `null` 可以表示失败, 可以表示成功, 甚至是表示任何情况.
 可是如果我们使用除了 `null` 之外的其他值, 将会使语义更加的清晰明确.
 
-That said, there are times when `null` is the right and correct thing to use.
-`null` is cheap, in terms of memory and speed, and it's unavoidable in object
-arrays. But in application code, as opposed to libraries, it is a major source
-of confusion, difficult and weird bugs, and unpleasant ambiguities -- e.g. when
-`Map.get` returns null, it can mean the value was absent, or the value was
-present and null. Most critically, null gives no indication what a null value
-means.
+同时还有着另一种情况, 在一些情况下: `null` 有着合适和正确的使用场景.
+在内存使用以及运行速度方面, `null` 是非常廉价、低消耗的, 同时, 它也是数组中不可避免的存在.
+但是在基于底层库的应用级别的代码中, `null` 通常是导致含糊语义以及疑难bug的罪魁祸首,
+就像我们之前讨论过的 `Map.get` 返回 null 值的含义问题. 最关键的是, `null` 并没有定义 null 值是什么含义.
 
 For these reasons, many of Guava's utilities are designed to fail fast in the
 presence of null rather than allow nulls to be used, so long as there is a
