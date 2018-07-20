@@ -46,7 +46,7 @@ If you really need null values, and you're having problems with a null-hostile
 collection implementations, use a different implementation. For example, use
 `Collections.unmodifiableList(Lists.newArrayList())` instead of `ImmutableList`.
 
-## Optional
+## Optional 对象
 
 Many of the cases where programmers use `null` is to indicate some sort of
 absence: perhaps where there might have been a value, there is none, or one
