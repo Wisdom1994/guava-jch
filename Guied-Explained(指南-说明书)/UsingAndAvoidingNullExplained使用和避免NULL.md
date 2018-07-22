@@ -35,11 +35,9 @@
 如果你想在一个十分"稀疏"的列表中使用"NULL", 还不如用一个 `Map<Integer, E>` 来的更好一点,
 `Map` 可能会有更高效的性能, 并能满足您应用程序中潜在的需求.
 
-Consider if there is a natural "null object" that can be used. There isn't
-always. But sometimes. For example, if it's an enum, add a constant to mean
-whatever you're expecting null to mean here. For example,
-`java.math.RoundingMode` has an `UNNECESSARY` value to indicate "do no rounding,
-and throw an exception if rounding would be necessary."
+我们还需要思考一个特殊情况, 我们可能需要一个特殊的的 "null值对象", 并不总是能用到,但是有时候我们真的需要有。
+举个栗子, 比如有个枚举类需要添加一个特殊的枚举值为 null, 就像 `java.math.RoundingMode` 中提供了一个 `UNNECESSARY` 来表示 "不做任何取整的操作,
+如果有任何取整的行为( _译注:除非计算结果为整数,不然都抛出异常_ ), 就快速抛出一个异常".
 
 如果你真的需要一个空值, 可是 Guava 中的"非空"集合类却不能够满足你的要求,
 那么你应该使用集合类另外的实现, 比如使用 JDK 中的 `Collections.unmodifiableList(Lists.newArrayList())`
