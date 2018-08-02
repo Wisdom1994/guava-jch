@@ -45,11 +45,9 @@
 
 ## Optional 对象
 
-
-Many of the cases where programmers use `null` is to indicate some sort of
-absence: perhaps where there might have been a value, there is none, or one
-could not be found. For example, `Map.get` returns `null` when no value is found
-for a key.
+在大多数的情况中, 程序开发者们使用 `null` 来表示一种 "**缺失**" 的情境 ———— 
+在某个地方可能表示默认的值， 也可能是表示那个地方没有值， 或者是那个值找不到了。
+举个简单的例子：就像 `Map.get` 方法，当它找不到 key 所对应的 value 的时候, 就会返回一个 `null`.
 
 `Optional<T>` is a way of replacing a nullable `T` reference with a non-null
 value. An `Optional` may either contain a non-null `T` reference (in which case
