@@ -55,16 +55,14 @@
 
 ```java
 Optional<Integer> possible = Optional.of(5);
-possible.isPresent(); // returns true
-possible.get(); // returns 5
+possible.isPresent(); // 对象是否存在？ 返回 true
+possible.get(); // 返回 5
 ```
 
-`Optional` is **not** intended as a direct analogue of any existing "option" or
-"maybe" construct from other programming environments, though it may bear some
-similarities.
+`Optional` 并非刻意的模拟其他编程语言下已经存在的 "option" 或者 "maybe" 的情况,
+但是总会有那么一些相似.
 
-We list some of the most common `Optional` operations here.
-
+我们这里给出了一些常用的 `Optional` 操作.
 ### Making an Optional
 
 Each of these are static methods on `Optional`.
