@@ -63,9 +63,10 @@ possible.get(); // 返回 5
 但是总会有那么一些相似.
 
 我们这里给出了一些常用的 `Optional` 操作.
-### Making an Optional
 
-Each of these are static methods on `Optional`.
+### Making an Optional 构建一个 Optional
+
+这列出 `Optional` 的一些静态方法.
 
 Method                       | Description
 :--------------------------- | :----------
