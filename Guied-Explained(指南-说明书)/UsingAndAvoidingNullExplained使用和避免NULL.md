@@ -106,6 +106,8 @@ the object themselves for their code to compile.
 
 ## Convenience methods
 
+当你想要使用 `null` 来代替一些默认值得话, 请使用 [`MoreObjects.firstNonNull(T, T)`],
+就像方法名所表示的那样, 如果这两者值都是 `null`,
 Whenever you want a `null` value to be replaced with some default value instead,
 use [`MoreObjects.firstNonNull(T, T)`]. As the method name suggests, if both of
 the inputs are null, it fails fast with a `NullPointerException`. If you are
