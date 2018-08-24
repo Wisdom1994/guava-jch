@@ -68,26 +68,25 @@ possible.get(); // 返回 5
 
 这列出 `Optional` 的一些静态方法.
 
-Method                       | Description
+Method                       | Description 描述
 :--------------------------- | :----------
-[`Optional.of(T)`]           | Make an Optional containing the given non-null value, or fail fast on null.
-[`Optional.absent()`]        | Return an absent Optional of some type.
-[`Optional.fromNullable(T)`] | Turn the given possibly-null reference into an Optional, treating non-null as present and null as absent.
+[`Optional.of(T)`]           | 创建指定引用 `T` 的 Optional 对象, 如果该引用为 `null` 则快速失败.
+[`Optional.absent()`]        | 创建一个 **引用缺失** 的 Optional 对象.
+[`Optional.fromNullable(T)`] | 创建一个指定引用 `T` 的 Optional 对象, `T` 可能为 null, 如果为 null, 则生成一个 **引用缺失** 的 Optional 对象.
 
-### Query methods
+### Optional 的查询方法
 
-Each of these are non-static methods on a particular `Optional<T>` value.
+这些方法都不是静态的.
 
-Method                  | Description
+Method                  | Description 描述
 :---------------------- | :----------
-[`boolean isPresent()`] | Returns `true` if this `Optional` contains a non-null instance.
-[`T get()`]             | Returns the contained `T` instance, which must be present; otherwise, throws an `IllegalStateException`.
-[`T or(T)`]             | Returns the present value in this `Optional`, or if there is none, returns the specified default.
-[`T orNull()`]          | Returns the present value in this `Optional`, or if there is none, returns `null`. The inverse operation of `fromNullable`.
-[`Set<T> asSet()`]      | Returns an immutable singleton `Set` containing the instance in this `Optional`, if there is one, or otherwise an empty immutable set.
+[`boolean isPresent()`] | 如果这个 `Optional` 对象包含的是 **非空** 引用, 返回 true.
+[`T get()`]             | 返回这个 `Optional` 所包含的 `T` 类型引用,  这个引用必须 **存在**, 否则抛出一个 `IllegalStateException` 异常.
+[`T or(T)`]             | 返回这个 `Optional` 所包含的 `T` 类型引用, 如果引用缺失, 返回一个指定的默认值.
+[`T orNull()`]          | 返回这个 `Optional` 所包含的 `T` 类型引用, 如果引用缺失, 返回一个 `null`. 这是`fromNullable(T)` 方法的逆操作.
+[`Set<T> asSet()`]      | 返回包含于这个 `Optional` 的不可变单例集合, 如果引用存在, 返回只有单一元素的集合, 如果引用缺失, 返回一个空的不可变集合
 
-`Optional` provides several more handy utility methods besides these; consult
-the Javadoc for details.
+`Optional` 提供了更多有用的工具方法, 浏览 Javadoc 以获得更多信息..
 
 ### What's the point?
 
