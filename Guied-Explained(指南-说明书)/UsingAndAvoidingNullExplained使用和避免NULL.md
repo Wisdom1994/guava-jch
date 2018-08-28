@@ -88,7 +88,7 @@ Method                  | Description 描述
 
 `Optional` 提供了更多有用的工具方法, 浏览 Javadoc 以获得更多信息..
 
-### What's the point?
+### What's the point? 重点
 
 Besides the increase in readability that comes from giving `null` a _name_, the
 biggest advantage of Optional is its idiot-proof-ness. It forces you to actively
