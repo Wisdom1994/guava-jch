@@ -88,7 +88,7 @@ Method                  | Description 描述
 
 `Optional` 提供了更多有用的工具方法, 浏览 Javadoc 以获得更多信息..
 
-### What's the point? 重点
+### What's the point? 意义是什么？
 
 Besides the increase in readability that comes from giving `null` a _name_, the
 biggest advantage of Optional is its idiot-proof-ness. It forces you to actively
@@ -104,10 +104,11 @@ be "present." You (and others) are far more likely to forget that
 makes it impossible for callers to forget that case, since they have to unwrap
 the object themselves for their code to compile.
 
-## Convenience methods
+## Convenience methods 一些的有用方法
 
 当你想要使用 `null` 来代替一些默认值得话, 请使用 [`MoreObjects.firstNonNull(T, T)`],
-就像方法名所表示的那样, 如果这两者值都是 `null`,
+就像方法名所表示的那样, 如果这两者值都是 `null`, 将会抛出一个 `NullPointerException`异常.
+而如果使用了一个 `Opintion`, 那么他会是非常优秀的替代方案, 比如 Optional.fromNullable(first).or(second)
 Whenever you want a `null` value to be replaced with some default value instead,
 use [`MoreObjects.firstNonNull(T, T)`]. As the method name suggests, if both of
 the inputs are null, it fails fast with a `NullPointerException`. If you are
