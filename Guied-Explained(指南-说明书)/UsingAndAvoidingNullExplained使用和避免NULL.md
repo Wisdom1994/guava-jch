@@ -110,8 +110,7 @@ the object themselves for their code to compile.
 就像方法名所表示的那样, 如果这两者值都是 `null`, 将会抛出一个 `NullPointerException`异常.
 而如果使用了一个 `Opintion`, 那就不会有这样的问题出现, 他将非常完美的代替 `null`. 比如 Optional.fromNullable(first).or(second).
 
-A couple of methods dealing with possibly-null `String` values are provided in
-`Strings`. Specifically, we provide the aptly named:
+我们提供了一些方法去处理那些可能为 `null` 的字符串类型的数据. 通过方法名, 我们能清晰地知道这个方法的作用是什么:
 
 *   [`emptyToNull(String)`]
 *   [`isNullOrEmpty(String)`]
