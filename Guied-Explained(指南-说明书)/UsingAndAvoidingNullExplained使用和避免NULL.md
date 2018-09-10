@@ -116,12 +116,10 @@ the object themselves for their code to compile.
 *   [`isNullOrEmpty(String)`]
 *   [`nullToEmpty(String)`]
 
-We would like to emphasize that these methods are primarily for interfacing with
-unpleasant APIs that equate null strings and empty strings. Every time _you_
-write code that conflates null strings and empty strings, the Guava team weeps.
-(If null strings and empty strings mean actively different things, that's
-better, but treating them as the same thing is a disturbingly common code
-smell.)
+需要特别强调的是, 我们提供的这些方法主要是用于改善那些将 `null` 和 `empty String (空字符串)` 混淆使用的API.
+当你写出那些 `null 字符串` 和 `empty 字符串` 混淆的代码的时候, 就是我们 Guava 团队哭泣的时候.
+(如果 null 字符串 和 empty 字符串 明显代表着不同含义, 我们建议您不如直接将他们分开来,
+而如果您仍要坚持将他们混为一谈的话, 那这真是个悲伤的故事)
 
 [Doug Lea]: http://en.wikipedia.org/wiki/Doug_Lea
 [Sir C. A. R. Hoare]: http://en.wikipedia.org/wiki/C._A._R._Hoare
