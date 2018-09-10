@@ -108,7 +108,7 @@ the object themselves for their code to compile.
 
 当你想要使用 `null` 来代替一些默认值得话, 请使用 [`MoreObjects.firstNonNull(T, T)`],
 就像方法名所表示的那样, 如果这两者值都是 `null`, 将会抛出一个 `NullPointerException`异常.
-而如果使用了一个 `Opintion`, 那么他会是非常优秀的替代方案, 比如 Optional.fromNullable(first).or(second).
+而如果使用了一个 `Opintion`, 那就不会有这样的问题出现, 他将非常完美的代替 `null`. 比如 Optional.fromNullable(first).or(second).
 
 A couple of methods dealing with possibly-null `String` values are provided in
 `Strings`. Specifically, we provide the aptly named:
