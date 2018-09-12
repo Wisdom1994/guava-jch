@@ -92,9 +92,7 @@ Method                  | Description 描述
 
 一方面, Optional 为 `null` 赋予确定的语义增强了可阅读性, 另一方面, Optional最大的优点可以看做是提供了 **傻瓜式** 的防护.
 Optional 使你将注意力集中在思考可能导致 **引用缺失** 的情况, 因为你必须 **显式** 的从 Optional 中获取引用.
- Null makes it
-disturbingly easy to simply forget things, and though FindBugs helps, we don't
-think it addresses the issue nearly as well.
+`null` 很容易使人忘记或者忽略掉一些细节, 尽管你可以通过 `FindBugs` 来找到那些相关的bug, 但是我们并不认为这能准确定位到问题的根源. 
 
 This is especially relevant when you're **returning** values that may or may not
 be "present." You (and others) are far more likely to forget that
