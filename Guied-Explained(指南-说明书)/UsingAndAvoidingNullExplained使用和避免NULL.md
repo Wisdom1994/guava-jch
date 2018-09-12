@@ -90,10 +90,9 @@ Method                  | Description 描述
 
 ### What's the point? 意义是什么？
 
-Besides the increase in readability that comes from giving `null` a _name_, the
-biggest advantage of Optional is its idiot-proof-ness. It forces you to actively
-think about the absent case if you want your program to compile at all, since
-you have to actively unwrap the Optional and address that case. Null makes it
+一方面, Optional 为 `null` 赋予确定的语义增强了可阅读性, 另一方面, Optional最大的优点可以看做是提供了 **傻瓜式** 的防护.
+Optional 使你将注意力集中在思考可能导致 **引用缺失** 的情况, 因为你必须 **显式** 的从 Optional 中获取引用.
+ Null makes it
 disturbingly easy to simply forget things, and though FindBugs helps, we don't
 think it addresses the issue nearly as well.
 
