@@ -94,12 +94,10 @@ Method                  | Description 描述
 Optional 使你将注意力集中在思考可能导致 **引用缺失** 的情况, 因为你必须 **显式** 的从 Optional 中获取引用.
 `null` 很容易使人忘记或者忽略掉一些细节, 尽管你可以通过 `FindBugs` 来找到那些相关的bug, 但是我们并不认为这能准确定位到问题的根源. 
 
-This is especially relevant when you're **returning** values that may or may not
-be "present." You (and others) are far more likely to forget that
-`other.method(a, b)` could return a null value than you're likely to forget that
-`a` could be null when you're implementing other.method. Returning `Optional`
-makes it impossible for callers to forget that case, since they have to unwrap
-the object themselves for their code to compile.
+与方法入参可能为 `null` 一样, 你的方法返回值也可能具有不那么 **现实** 含义(可能为 Null).
+你(或者其他人)可能会忘记别人给你提供的方法 `method(a, b)` 方法可能返回一个 null, 同样的,
+你也会在你的方法 `method(a, b)` 中忽略掉入参 `a` 也可能为 null 的问题. 使用 `Optional` 作为你方法的返回值,
+迫使你必须考虑到各种可能引起 `引用缺失` 的情况, 直到考虑全面才能使你的代码通过编译.
 
 ## Convenience methods 一些的有用方法
 
