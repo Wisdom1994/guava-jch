@@ -99,7 +99,7 @@ Optional 使你将注意力集中在思考可能导致 **引用缺失** 的情�
 你也会在你的方法 `method(a, b)` 中忽略掉入参 `a` 也可能为 null 的问题. 使用 `Optional` 作为你方法的返回值,
 迫使你必须考虑到各种可能引起 `引用缺失` 的情况, 直到考虑全面才能使你的代码通过编译.
 
-## Convenience methods 一些的有用方法
+## Convenience methods 一些有用的方法
 
 当你想要使用 `null` 来代替一些默认值得话, 请使用 [`MoreObjects.firstNonNull(T, T)`],
 就像方法名所表示的那样, 如果这两者值都是 `null`, 将会抛出一个 `NullPointerException`异常.
