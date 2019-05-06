@@ -106,9 +106,10 @@ Optional 使你将注意力集中在思考可能导致 **引用缺失** 的情�
 而如果使用了一个 `Opintion`, 那就不会有这样的问题出现, 他将非常完美的代替 `null`. 比如 Optional.fromNullable(first).or(second).
 
 我们提供了一些方法去处理那些可能为 `null` 的字符串类型的数据. 通过方法名, 我们能清晰地知道这个方法的作用是什么:
+(最近使用Apache.util.commoms3包时, 发现了一些类似的api)
 
-*   [`emptyToNull(String)`]
-*   [`isNullOrEmpty(String)`]
+*   [`emptyToNull(String)`]  
+*   [`isNullOrEmpty(String)`] (Commons3  StringUtils.isBlank(CharSequence cs))
 *   [`nullToEmpty(String)`]
 
 需要特别强调的是, 我们提供的这些方法主要是用于改善那些将 `null` 和 `empty String (空字符串)` 混淆使用的API.
